@@ -3,25 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Circuit Soft</title>
     <link rel="icon" href="img/bolt-solid.svg">
 </head>
 <body>
-    <!-- Menu lateral --->
-    <nav>
-        <h1>Circuit Soft</h1>
+    <main>
+        <h1 class="title">Circuit Soft</h1>
 
-        <ul>
-            <li>
-                <a href="telas/RcRl.html">Circuito RC e RL</a>
-            </li>
-        </ul>
-    </nav>
+        <nav class="menu">
+            <ul>
 
-    <section>
-        <h1>Bem vindo!</h1>
-        <h2>Olá, obrigado por usar o software para seus estudos em circuitos elétricos, espero que tenha uma boa experiencia!!</h2>
-    </section>
+                <li class="list-item">
+                    Circuitos RC's e RL's
+                </li>
+
+                <li class="list-item">
+                    Circuitos RCL's
+                </li>
+
+                <li class="list-item">
+                    Item 2
+                </li>
+
+                <li class="list-item">
+                    Item 3
+                </li>
+
+            </ul>
+        </nav>
+
+        <!-- Telas de cada funcionalidade -->
+
+        <div class="screen-item" id="RcRl">
+           <h2>Circuitos RC e RL</h2>
+
+           <div class="main">
+                <nav>
+                    <ul>
+                        <li class="screen-menu">
+                            Voltar
+                        </li>
+
+                        <li>
+                            Polinomio
+                        </li>
+
+                        <li>
+                            Polos e Zeros
+                        </li>
+
+                        <li>
+                            Modo livre
+                        </li>
+                    </ul>
+                </nav>
+
+                <div id="painel-control">
+                    <div class="form">
+                        <p>Ganho</p>
+                        <input type="text">
+
+                        <p>Numerador</p>
+                        <input type="text">
+
+                        <p>Denominador</p>
+                        <input type="text">
+
+                        <button>Gerar Polinomio</button>
+                        <button>Gerar Grafico</button>
+                    </div>
+                    
+                </div>
+
+                <div id="terminal">
+                    <textarea name="ter" id="ter" cols="30" rows="10" disabled></textarea>
+                </div>
+           </div>
+        </div>
+
+        <div class="screen-item" id="Rcl">
+           <h2>Circuitos RCL</h2>
+
+           <div class="main">
+                <nav>
+                    <ul>
+                        <li class="screen-menu">
+                            Voltar
+                        </li>
+
+                        <li>
+                            Polinomio
+                        </li>
+
+                        <li>
+                            Polos e Zeros
+                        </li>
+
+                        <li>
+                            Modo livre
+                        </li>
+                    </ul>
+                </nav>
+           </div>
+        </div>
+
+        <div class="screen-item" id="Spec1">
+            <h2>Spec1</h2>
+        </div>
+
+        <div class="screen-item" id="Spec2">
+            <h2>Spec2</h2>
+        </div>
+
+    </main>
+    <div id="info">
+        <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</h3>
+    </div>
+
+
+
+    <script src="js/transitionScreen.js"></script>
 </body>
 </html>

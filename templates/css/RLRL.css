@@ -1,0 +1,82 @@
+#RcRl{
+    position: relative;
+    width: 100%;
+    height: 96%;
+}
+
+#RcRl h2{
+    text-align: center;
+    font-style: normal;
+    font-size: 2em;
+}
+
+#RcRl .main{
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#RcRl .main nav{
+    width: 80%;
+    margin-top: -200px;
+}
+
+#RcRl .main nav ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#RcRl .main nav ul li{
+    padding: 10px;
+    color: #1fbf77;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.2s ease-out;
+}
+
+#RcRl .main nav ul li:hover{
+    cursor: pointer;
+    color: aliceblue;
+    background-color: #1fbf77;
+}
+
+#RcRl #painel-control, #RcRl #terminal{
+    margin-top: -280px;
+    width: 45%;
+    height: 450px;
+}
+#RcRl #painel-control .form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 200px;
+}
+
+#RcRl #painel-control p{
+    font-weight: bold;
+}
+
+#RcRl #painel-control input{
+    margin-bottom: 10px;
+}
+
+#RcRl #painel-control .form button{
+    border: none;
+    margin: 10px 0;
+    background-color: #1fbf77;
+    color: aliceblue;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+#RcRl #terminal textarea{
+    width: 100%;
+    height: 100%;
+}

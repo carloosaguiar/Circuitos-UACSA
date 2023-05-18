@@ -1,4 +1,9 @@
 import eel
+import sys
+
+#Habilidando a importação no diretorio modules
+dirModules = sys.path[0] + '\modules'
+sys.path.append(dirModules)
 
 eel.init('templates')
 
