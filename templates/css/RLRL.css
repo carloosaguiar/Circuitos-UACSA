@@ -48,6 +48,8 @@
     margin-top: -280px;
     width: 45%;
     height: 450px;
+    display: flex;
+    justify-content: space-around;
 }
 #RcRl #painel-control .form{
     display: flex;

@@ -5,10 +5,24 @@ import sys
 dirModules = sys.path[0] + '\modules'
 sys.path.append(dirModules)
 
+from RCRL import H_s
+
+H = H_s()
+
 eel.init('templates')
 
 @eel.expose
-def demo(x):
-    return x**2
+def info_sys(ganho, num, den):
+    sys, zeros, polos = H.info(ganho, num, den)
 
-eel.start('index.html', size = (1000, 600))
+    return sys, zeros, polos
+
+@eel.expose
+def plot_RCRl(ganho, num, den):
+    
+    H.plot_H(ganho, num, den)
+    return 'Ok'
+
+
+
+eel.start('index.html', size = (1200, 800))

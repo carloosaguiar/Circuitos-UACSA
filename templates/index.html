@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/main.css">
     <title>Circuit Soft</title>
     <link rel="icon" href="img/bolt-solid.svg">
+    <script src="../eel.js"></script>
 </head>
 <body>
     <main>
@@ -35,6 +36,7 @@
 
         <!-- Telas de cada funcionalidade -->
 
+        <!-- Circuito RC e RL de 1ª Ordem -->
         <div class="screen-item" id="RcRl">
            <h2>Circuitos RC e RL</h2>
 
@@ -62,22 +64,23 @@
                 <div id="painel-control">
                     <div class="form">
                         <p>Ganho</p>
-                        <input type="text">
+                        <input type="text" id="ganho" value="1">
 
                         <p>Numerador</p>
-                        <input type="text">
+                        <input type="text" id="numerador">
 
                         <p>Denominador</p>
-                        <input type="text">
+                        <input type="text" id="denominador">
 
-                        <button>Gerar Polinomio</button>
-                        <button>Gerar Grafico</button>
+                        <button class="button">Gerar Polinomio</button>
+                        <button class="button">Gerar Grafico</button>
                     </div>
                     
                 </div>
 
+                <!-- Area onde vai as informações da resposta em frequencia -->
                 <div id="terminal">
-                    <textarea name="ter" id="ter" cols="30" rows="10" disabled></textarea>
+                    <textarea name="ter" id="ter" cols="30" rows="10" disabled style="text-align: center;"></textarea>
                 </div>
            </div>
         </div>
@@ -122,7 +125,8 @@
     </div>
 
 
-
+    <!-- Area para adicionar os scripts JS -->
     <script src="js/transitionScreen.js"></script>
+    <script src="js/RcRl.js"></script>
 </body>
 </html>
