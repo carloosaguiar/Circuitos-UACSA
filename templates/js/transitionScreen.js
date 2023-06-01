@@ -35,5 +35,22 @@ for(let i = 0; i <= options.length-1; i++){
         main.classList.remove('active-screen');
         tela_item[valueAtual].classList.remove('screen-item-active');
     }
-
 };
+
+//menu das sub telas
+
+let item_menu = document.getElementsByClassName('item-menu');
+let sub_tela = document.getElementsByClassName('sub-tela');
+
+for(let i = 0; i <= item_menu.length-1; i++){
+    item_menu[i].onclick = () =>{
+
+        for(j = 0; j <= item_menu.length - 1; j++){
+            sub_tela[j].style.display = 'none';
+            item_menu[j].classList.remove('active')
+        }
+
+        sub_tela[i].style.display = 'block';
+        item_menu[i].classList.add('active')
+    }
+}

@@ -5,24 +5,27 @@ import sys
 dirModules = sys.path[0] + '\modules'
 sys.path.append(dirModules)
 
-from RCRL import H_s
-
-H = H_s()
+import RCRL
 
 eel.init('templates')
 
+#======== SESSÂO DE FUNÇÕES =========
 @eel.expose
 def info_sys(ganho, num, den):
-    sys, zeros, polos = H.info(ganho, num, den)
+    sys, zeros, polos = RCRL.info(ganho, num, den)
 
     return sys, zeros, polos
 
 @eel.expose
-def plot_RCRl(ganho, num, den):
-    
-    H.plot_H(ganho, num, den)
-    return 'Ok'
+def plot_RCRl(ganho, num, den, raio):
+    if raio == []:
+        RCRL.plot_H(ganho, num, den, None)
+    else:
+        RCRL.plot_H(ganho, num, den, raio)
 
+@eel.expose
+def gerar_poly(options, zeros, polos):
+    RCRL.generate_poly(options, zeros,polos)
 
-
+#======= STARTA A APLICAÇÃO ========
 eel.start('index.html', size = (1200, 800))

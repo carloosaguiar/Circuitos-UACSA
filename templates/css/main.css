@@ -7,6 +7,24 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1em;
 }
+.omega-range{
+    margin: 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 500px;
+}
+
+.omega-range p{
+    margin: 0px 10px;
+    text-align: center;
+}
+
+.omega-range input{
+    width: 100px;
+    padding: 10px;
+}
+
 
 body{
     display: flex;
@@ -82,9 +100,11 @@ main nav ul .list-item:hover{
 
 .screen-item-active{
     display: block;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    width: 50%;
-    height: 80px;
+}
+
+.popup-text{
+    position: relative;
+    overflow-y: scroll;
+    width: 98%;
+    height: 350px;
 }

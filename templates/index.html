@@ -47,40 +47,107 @@
                             Voltar
                         </li>
 
-                        <li>
+                        <li class="item-menu active">
                             Polinomio
                         </li>
 
-                        <li>
+                        <li class="item-menu">
                             Polos e Zeros
                         </li>
 
-                        <li>
+                        <li class="item-menu">
                             Modo livre
                         </li>
+
+                        <button class="info" style="background-color: transparent; border: none;"><img src="img/circle-question-solid.svg" style="width: 30px;"></button>
                     </ul>
                 </nav>
 
-                <div id="painel-control">
-                    <div class="form">
-                        <p>Ganho</p>
-                        <input type="text" id="ganho" value="1">
+                <div class="sub-tela" id="polinomio">
+                    <div class="content">
 
-                        <p>Numerador</p>
-                        <input type="text" id="numerador">
+                        <div class="form">
+                            <p>Ganho</p>
+                            <input type="text" id="ganho" value="1">
+    
+                            <p>Numerador</p>
+                            <input type="text" id="numerador">
+    
+                            <p>Denominador</p>
+                            <input type="text" id="denominador">
+    
+                            <button class="button">Gerar H(s)</button>
+                            <section class="omega-range">
+                                <span>
+                                    <p>Freq. Inicial</p>
+                                    <span>10^</span>
+                                    <input class="init-freq" type="number" value="0">
+                                </span>
 
-                        <p>Denominador</p>
-                        <input type="text" id="denominador">
+                                <span>
+                                    <p>Freq. Final</p>
+                                    <span>10^</span>
+                                    <input class="end-freq" type="number" value="0">
+                                </span>
 
-                        <button class="button">Gerar Polinomio</button>
-                        <button class="button">Gerar Grafico</button>
+                                <span>
+                                    <p>Nº de pontos</p>
+                                    <input class="interval" type="number" value="1">
+                                </span>
+                            </section>
+                            <button class="button">Gerar Grafico</button>
+                        </div>
+    
+                        <!-- Area onde vai as informações da resposta em frequencia -->
+                        <div id="terminal" style="display: block;">
+                            <textarea name="ter" id="ter" cols="30" rows="10" disabled style="text-align: center; display: block;"></textarea>
+                        </div>
+
                     </div>
-                    
                 </div>
 
-                <!-- Area onde vai as informações da resposta em frequencia -->
-                <div id="terminal">
-                    <textarea name="ter" id="ter" cols="30" rows="10" disabled style="text-align: center;"></textarea>
+                <div class="sub-tela" style="display: none;">
+                    <div class="content">
+
+                        <div class="form">
+                            <p>Zeros</p>
+                            <input type="text" id="zeros-poly">
+    
+                            <p>Polos</p>
+                            <input type="text" id="polos-poly">
+    
+                            <button class="button">Gerar Polinomio de H(s)</button>
+
+                            <section class="omega-range">
+                                <span>
+                                    <p>Freq. Inicial</p>
+                                    <input class="init-freq" type="number" value="0">
+                                </span> 
+
+                                <span>
+                                    <p>Freq. Final</p>
+                                    <input class="end-freq"type="number" value="0">
+                                </span>
+
+                                <span>
+                                    <p>Nº de Pontos</p>
+                                    <input class="interval" type="number" value="1">
+                                </span>
+                            </section>
+
+                            <button class="button">Gerar Grafico</button>
+                        </div>
+    
+                        <!-- Area onde vai as informações da resposta em frequencia -->
+                        <div style="display: block;">
+                            <textarea name="ter" id="ter2" cols="30" rows="10" disabled style="text-align: center; display: block; width: 100%; height:60vh;"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="sub-tela" style="display: none;">
+
                 </div>
            </div>
         </div>
@@ -128,5 +195,6 @@
     <!-- Area para adicionar os scripts JS -->
     <script src="js/transitionScreen.js"></script>
     <script src="js/RcRl.js"></script>
+    <script src="js/generic.js"></script>
 </body>
 </html>
