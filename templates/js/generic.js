@@ -24,6 +24,7 @@ button_info.onclick = () =>{
     div.style.background = '#FFF';
     div.style.width = '500px';
     div.style.height = '400px';
+    div.style.overflowY = 'hidden';
 
     
     div.innerHTML = pop_upText;

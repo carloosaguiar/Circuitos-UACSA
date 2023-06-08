@@ -8,18 +8,29 @@ def info(ganho: float, numerador: list, denominador: list):
     polos = str(np.round(control.pole(sys), 2).tolist())
     zeros = str(np.round(control.zero(sys), 2).tolist())
 
-    return str(sys), zeros, polos
+    mag, phase, omega = control.bode(sys, plot=False)
+
+    mag_corte = max(mag)/(2**0.5)
+    diference_array = np.absolute(mag - mag_corte)
+    index = diference_array.argmin()
+
+    freq_corte = omega[index]
+
+    return str(sys), zeros, polos, freq_corte
 
     
 def plot_H(ganho: float, numerador: list, denominador: list, range: list):
 
+    hz = None
     raio_freq = None
 
-    if(range != None):
-        raio_freq = np.logspace(range[0], range[1], range[2])
+    raio_freq = np.logspace(range[0], range[1], range[2])
+
+    if range[3] == 'Hz':
+       hz = True
     
     sys = ganho * control.tf(numerador, denominador)
-    control.bode(sys, raio_freq, dB=True)
+    control.bode(sys, raio_freq, dB=True, Hz=hz)
     plt.show()
 
 def generate_poly(options: int, zeros: list, polos: list, range):
@@ -31,16 +42,14 @@ def generate_poly(options: int, zeros: list, polos: list, range):
     zeros_complex = list(map(lambda num: complex(num), zeros))
     polos_complex = list(map(lambda num: complex(num), polos))
 
-    print(zeros_complex)
-    print(polos_complex)
-
-    zero = np.poly(zeros_complex).tolist()
-    polo = np.poly(polos_complex).tolist()
+    num = np.poly(zeros_complex).tolist()
+    den = np.poly(polos_complex).tolist() 
 
     if(options == 1):
         #Caso 1 Devolve um polinomio
-        sys, p, z = info(1, zero, polo)
+        sys, p, z, freq = info(1, num, den)
         return str(sys)
+    
     elif(options == 2):
         #caso 2 gera um grafico
-        plot_H(1, zero, polo, range)
+        plot_H(1, num, den, range)

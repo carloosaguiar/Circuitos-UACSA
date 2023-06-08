@@ -1,4 +1,12 @@
 import numpy as np
+import matplotlib.pyplot as plt
+import control
 
-lista = np.poly(2-5j,5-6j,10-4j)
-print(lista)
+H = control.tf([1],[1,30])
+
+freq_omega = np.logspace(0, 3, 50)
+
+mag, phase, omega = control.bode(H, freq_omega, dB=True, Hz=True)
+
+#print(omega, end="\n")
+plt.show()

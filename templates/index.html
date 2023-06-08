@@ -16,7 +16,7 @@
             <ul>
 
                 <li class="list-item">
-                    Circuitos RC's e RL's
+                    Função Transferencia H(s)
                 </li>
 
                 <li class="list-item">
@@ -36,7 +36,7 @@
 
         <!-- Telas de cada funcionalidade -->
 
-        <!-- Circuito RC e RL de 1ª Ordem -->
+        <!-- Função Transferencia -->
         <div class="screen-item" id="RcRl">
            <h2>Circuitos RC e RL</h2>
 
@@ -68,7 +68,7 @@
 
                         <div class="form">
                             <p>Ganho</p>
-                            <input type="text" id="ganho" value="1">
+                            <input type="number" id="ganho" value="1">
     
                             <p>Numerador</p>
                             <input type="text" id="numerador">
@@ -92,7 +92,15 @@
 
                                 <span>
                                     <p>Nº de pontos</p>
-                                    <input class="interval" type="number" value="1">
+                                    <input class="interval" type="number" value="20">
+                                </span>
+
+                                <span>
+                                    <p>Unidade</p>
+                                    <select class="unid">
+                                        <option value="rad-seg">Rad/seg</option>
+                                        <option value="Hz">Hz</option>
+                                    </select>
                                 </span>
                             </section>
                             <button class="button">Gerar Grafico</button>
@@ -100,7 +108,7 @@
     
                         <!-- Area onde vai as informações da resposta em frequencia -->
                         <div id="terminal" style="display: block;">
-                            <textarea name="ter" id="ter" cols="30" rows="10" disabled style="text-align: center; display: block;"></textarea>
+                            <textarea name="ter" id="ter" cols="30" rows="10" disabled style="text-align: left; display: block;"></textarea>
                         </div>
 
                     </div>
@@ -110,6 +118,9 @@
                     <div class="content">
 
                         <div class="form">
+                            <p>Ganho</p>
+                            <input type="number" value="1">
+
                             <p>Zeros</p>
                             <input type="text" id="zeros-poly">
     
@@ -121,17 +132,27 @@
                             <section class="omega-range">
                                 <span>
                                     <p>Freq. Inicial</p>
+                                    <span>10^</span>
                                     <input class="init-freq" type="number" value="0">
-                                </span> 
-
-                                <span>
-                                    <p>Freq. Final</p>
-                                    <input class="end-freq"type="number" value="0">
                                 </span>
 
                                 <span>
-                                    <p>Nº de Pontos</p>
-                                    <input class="interval" type="number" value="1">
+                                    <p>Freq. Final</p>
+                                    <span>10^</span>
+                                    <input class="end-freq" type="number" value="0">
+                                </span>
+
+                                <span>
+                                    <p>Nº de pontos</p>
+                                    <input class="interval" type="number" value="20">
+                                </span>
+
+                                <span>
+                                    <p>Unidade</p>
+                                    <select class="unid">
+                                        <option value="rad-seg">Rad/seg</option>
+                                        <option value="Hz">Hz</option>
+                                    </select>
                                 </span>
                             </section>
 
@@ -140,7 +161,7 @@
     
                         <!-- Area onde vai as informações da resposta em frequencia -->
                         <div style="display: block;">
-                            <textarea name="ter" id="ter2" cols="30" rows="10" disabled style="text-align: center; display: block; width: 100%; height:60vh;"></textarea>
+                            <textarea name="ter" id="ter2" cols="30" rows="10" disabled style="text-align: left; display: block; width: 100%; height:60vh;"></textarea>
                         </div>
 
                     </div>
@@ -187,6 +208,7 @@
         </div>
 
     </main>
+
     <div id="info">
         <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</h3>
     </div>

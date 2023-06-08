@@ -54,7 +54,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 #RcRl .main .sub-tela .form{
@@ -62,10 +62,29 @@
     flex-direction: column;
     align-items: flex-start;
     margin-top: 80px;
+    width: 40%;
 }
 
 #RcRl .main .sub-tela #terminal #ter{
     margin-top: 20px;
     width: 100%;
     height: 70%;
+}
+
+#RcRl .main .sub-tela .form .omega-range{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#RcRl .main .sub-tela .form .omega-range span{
+    margin: 5px;
+}
+
+#RcRl .main .sub-tela .form .omega-range span{
+    margin: 5px;
+}
+
+#RcRl .main .sub-tela .unid{
+    padding: 10px;
 }

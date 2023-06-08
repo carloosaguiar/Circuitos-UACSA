@@ -10,16 +10,14 @@ const terminal = document.getElementById('ter')
 
 //pegar o raio de frequencias
 function getRangeFreqPolinomio(index){
-    freq_inicial = document.getElementsByClassName('init-freq')[index].value;
-    freq_final = document.getElementsByClassName('end-freq')[index].value;
-    pontos = document.getElementsByClassName('interval')[index].value;
+    let freq_inicial = document.getElementsByClassName('init-freq')[index].value;
+    let freq_final = document.getElementsByClassName('end-freq')[index].value == 0 ? 3 : document.getElementsByClassName('end-freq')[index].value;
+    let pontos = document.getElementsByClassName('interval')[index].value;
+    let unidade = document.getElementsByClassName('unid')[index].value;
 
-    if(freq_inicial == 0 && freq_final == 0 && pontos == 1){
-        return []
-    }else{
-        let paramets = [parseFloat(freq_inicial),parseFloat(freq_final), parseFloat(pontos)]
-        return paramets
-    }
+    let paramets = [parseFloat(freq_inicial),parseFloat(freq_final), parseFloat(pontos), unidade]
+    
+    return paramets
 
 }
 
@@ -85,39 +83,96 @@ function convertToArrayGeneric(value){
     return new_array;
 }
 
-//renderizar o polinomio no formato mais clear para o usuario
-function generatePolinomioString(ganho = 1, numArray, denArray){
-    
-    let polinomio = '';
+function processZerosPolos(value){
 
-    numArray.forEach((e, i) =>{
-        
-    });
-};
+    let raizPoli = []
+
+    let aux = value.replace('[','');
+    aux = aux.replace(']','');
+    aux = aux.replaceAll('(','');
+    aux = aux.replaceAll(')','');
+
+    aux = [...aux]
+
+    let count = '';
+
+    aux.forEach(e =>{
+
+        switch(e){
+            case ',':
+                raizPoli.push(count);
+                count = '';
+                break
+            default:
+                count += e
+                break
+        }
+
+    })
+
+    raizPoli.push(count)
+
+    return raizPoli.map(e => {
+        if(e.includes('0j')){
+            return parseFloat(e)
+        }else{
+            return e
+        }
+    })
+}
 
 gerar_polinomio.onclick = () =>{
     let ganho = parseFloat(ganho_input.value);
     let num = convertToArrayNumber(num_input.value);
     let den = convertToArrayNumber(den_input.value);
 
-    eel.info_sys(ganho, num, den)(H => {
+    eel.info_sys(ganho, num, den)(async H => {
+
+        let data = await H;
+        let zeros = [];
+        let polos;
+
+        if(data[1] != '[]'){
+            zeros = processZerosPolos(data[1]);
+        }
+
+        polos = processZerosPolos(data[2]);
+
+        let obs = '';
+
+        if(zeros.length < polos.length){
+            //caso o numeros de zeros for menor que polos
+            obs = `
+            Nota: Existe mais ${polos.length - zeros.length} Zeros  no Infinito.
+            `
+        }else if(polos.length < zeros.length){
+            //caso o numeros de polos for menor que zeros
+            obs = `
+            Nota: Existe mais ${zeros.length - polos.length} Polos no Infinito.
+            `
+        }
+
         terminal.value = `
-        ${H[0]}
+        Polinomio H(s): 
+        ${(data[0]).replaceAll('\n','\n                        ')}
+        
+        ${'='.repeat(30)}
+        Informações:
 
-        Zeros: ${H[1]}
-
-        Polos: ${H[2]}
-        `
+        Zeros: ${zeros}
+        Polos: ${polos}
+        Frequecia de Corte: ${data[3].toFixed(2)} Rad/seg
+        ${obs}
+        ${'='.repeat(30)}
+        `;
     });
 };
 
-gerar_grafico.onclick = async () => {
+gerar_grafico.onclick = () => {
     let ganho = parseFloat(ganho_input.value);
     let num = convertToArrayNumber(num_input.value);
     let den = convertToArrayNumber(den_input.value);
     let raio_freq = getRangeFreqPolinomio(0);
-
-    console.log(raio_freq)
 
     eel.plot_RCRl(ganho, num, den, raio_freq)
 };
@@ -132,18 +187,44 @@ let input_polos = document.getElementById('polos-poly');
 
 let terminal2 = document.getElementById('ter2');
 
-gerar_poly.onclick = () =>{
+gerar_poly.onclick = () => {
     let zeros = convertToArrayGeneric(input_zeros.value);
     let polos = convertToArrayGeneric(input_polos.value);
     
+    eel.gerar_poly(1, zeros, polos, [])(sys =>{
 
-    eel.gerar_poly(1, zeros, polos)(sys =>{
-        terminal2.value = sys;
+        zeros = zeros.map(x =>{
+            if(x < 0){
+                return `(s - ${Math.abs(x)})`
+            }else{
+                return `(s + ${x})`
+            }
+        })
+    
+        polos = polos.map(x =>{
+            if(x < 0){
+                return `(s - ${Math.abs(x)})`
+            }else{
+                return `(s + ${x})`
+            }
+        })
+
+        terminal2.value = `
+        Polinomio H(s): 
+        ${(sys).replaceAll('\n','\n                        ')}
+        
+        ${'='.repeat(30)}
+        Informações:
+
+        Zeros: ${zeros.join('.')}
+        Polos: ${polos.join('.')}
+        ${'='.repeat(30)}
+        `;
     });
 
 };
 
-gerar_graph.onclick = async () =>{
+gerar_graph.onclick = () =>{
     let zeros = convertToArrayGeneric(input_zeros.value);
     let polos = convertToArrayGeneric(input_polos.value);
 
