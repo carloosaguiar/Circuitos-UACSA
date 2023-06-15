@@ -27,7 +27,7 @@ let options = document.getElementsByClassName('screen-menu');
 
 for(let i = 0; i <= options.length-1; i++){
 
-    options[i].onclick = ()=>{
+    options[i].onclick = ()=> {
         info.style.display = 'flex';
         nav.style.display = 'block';
         h1.style.display = 'block';
@@ -39,13 +39,29 @@ for(let i = 0; i <= options.length-1; i++){
 
 //menu das sub telas
 
+//Sub telas do H(s)
 let item_menu = document.getElementsByClassName('item-menu');
 let sub_tela = document.getElementsByClassName('sub-tela');
 
-for(let i = 0; i <= item_menu.length-1; i++){
+for(let i = 0; i <= 2; i++){
     item_menu[i].onclick = () =>{
 
-        for(j = 0; j <= item_menu.length - 1; j++){
+        for(j = 0; j <= 2; j++){
+            sub_tela[j].style.display = 'none';
+            item_menu[j].classList.remove('active')
+        }
+
+        sub_tela[i].style.display = 'block';
+        item_menu[i].classList.add('active')
+    }
+}
+
+//Sub telas do RLC's
+
+for(let i = 3; i <= 4; i++){
+    item_menu[i].onclick = () =>{
+
+        for(j = 3; j <= 4; j++){
             sub_tela[j].style.display = 'none';
             item_menu[j].classList.remove('active')
         }

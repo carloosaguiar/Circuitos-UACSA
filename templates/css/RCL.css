@@ -1,16 +1,16 @@
-.screen-item{
+#rlc{
     position: relative;
     width: 100%;
     height: 96%;
 }
 
-.screen-item h2{
+#rlc h2{
     text-align: center;
     font-style: normal;
     font-size: 2em;
 }
 
-.screen-item .main{
+#rlc .main{
     margin-top: 10px;
     display: flex;
     width: 100%;
@@ -19,18 +19,22 @@
     flex-wrap: wrap;
 }
 
-.screen-item .main nav{
+#rlc .main nav{
     width: 80%;
-    margin-top: -200px;
 }
 
-.screen-item .main nav ul{
+#rlc .main nav ul{
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
 
-.screen-item .main nav ul li{
+#rlc .main nav ul .active{
+    color: aliceblue;
+    background-color: #1fbf77;
+}
+
+#rlc .main nav ul li{
     padding: 10px;
     color: #1fbf77;
     font-weight: bold;
@@ -38,8 +42,13 @@
     transition: 0.2s ease-out;
 }
 
-.screen-item .main nav ul li:hover{
+#rlc .main nav ul li:hover{
     cursor: pointer;
     color: aliceblue;
     background-color: #1fbf77;
+}
+
+#rlc .main .sub-tela{
+    display: flex;
+    align-items: flex-start;
 }

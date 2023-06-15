@@ -10,7 +10,7 @@ def info(ganho: float, numerador: list, denominador: list):
 
     mag, phase, omega = control.bode(sys, plot=False)
 
-    mag_corte = max(mag)/(2**0.5)
+    mag_corte = 3
     diference_array = np.absolute(mag - mag_corte)
     index = diference_array.argmin()
 

@@ -19,6 +19,7 @@
 #RcRl .main nav{
     width: 80%;
     margin-top: 0px;
+    z-index: 100;
 }
 
 #RcRl .main nav ul{
@@ -87,4 +88,46 @@
 
 #RcRl .main .sub-tela .unid{
     padding: 10px;
+}
+
+#RcRl .main .sub-tela #projeto{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+#RcRl .main .sub-tela #projeto #painel-control{
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 400px;
+}
+
+#RcRl .main .sub-tela #projeto #painel-control #button-area, #RcRl .main .sub-tela #projeto #painel-control #input-data, #RcRl .main .sub-tela #projeto #painel-control #modelagem{
+    width: 90%;
+}
+
+#RcRl .main .sub-tela #projeto #painel-control #button-area{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -50px;
+    z-index: 0;
+    margin-bottom: -50px;
+}
+
+#RcRl .main .sub-tela #projeto #painel-control #button-area button{
+    padding: 5px;
+}
+
+#RcRl .main .sub-tela #projeto #painel-control #input-data{
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    overflow-y: scroll;
 }

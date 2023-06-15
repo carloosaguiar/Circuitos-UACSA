@@ -174,7 +174,7 @@ gerar_grafico.onclick = () => {
     let den = convertToArrayNumber(den_input.value);
     let raio_freq = getRangeFreqPolinomio(0);
 
-    eel.plot_RCRl(ganho, num, den, raio_freq)
+    eel.plot_Hs(ganho, num, den, raio_freq)
 };
 
 //parte de Zeros e Polos
@@ -195,17 +195,17 @@ gerar_poly.onclick = () => {
 
         zeros = zeros.map(x =>{
             if(x < 0){
-                return `(s - ${Math.abs(x)})`
+                return `(s + ${Math.abs(x)})`
             }else{
-                return `(s + ${x})`
+                return `(s - ${x})`
             }
         })
     
         polos = polos.map(x =>{
             if(x < 0){
-                return `(s - ${Math.abs(x)})`
+                return `(s + ${Math.abs(x)})`
             }else{
-                return `(s + ${x})`
+                return `(s - ${x})`
             }
         })
 
@@ -216,8 +216,8 @@ gerar_poly.onclick = () => {
         ${'='.repeat(30)}
         Informações:
 
-        Zeros: ${zeros.join('.')}
-        Polos: ${polos.join('.')}
+        Numerador: ${zeros.join('.')}
+        Denominador: ${polos.join('.')}
         ${'='.repeat(30)}
         `;
     });
