@@ -27,7 +27,7 @@ let options = document.getElementsByClassName('screen-menu');
 
 for(let i = 0; i <= options.length-1; i++){
 
-    options[i].onclick = ()=>{
+    options[i].onclick = ()=> {
         info.style.display = 'flex';
         nav.style.display = 'block';
         h1.style.display = 'block';
@@ -39,18 +39,29 @@ for(let i = 0; i <= options.length-1; i++){
 
 //menu das sub telas
 
-let item_menu = document.getElementsByClassName('item-menu');
-let sub_tela = document.getElementsByClassName('sub-tela');
+function transitionSubTelas(inicio, fim){
 
-for(let i = 0; i <= item_menu.length-1; i++){
-    item_menu[i].onclick = () =>{
+    let item_menu = document.getElementsByClassName('item-menu');
+    let sub_tela = document.getElementsByClassName('sub-tela');
 
-        for(j = 0; j <= item_menu.length - 1; j++){
-            sub_tela[j].style.display = 'none';
-            item_menu[j].classList.remove('active')
+    for(let i = inicio; i <= fim; i++){
+        item_menu[i].onclick = () =>{
+    
+            for(j = inicio; j <= fim; j++){
+                sub_tela[j].style.display = 'none';
+                item_menu[j].classList.remove('active')
+            }
+    
+            sub_tela[i].style.display = 'block';
+            item_menu[i].classList.add('active')
         }
-
-        sub_tela[i].style.display = 'block';
-        item_menu[i].classList.add('active')
     }
 }
+
+//Sub telas do H(s)
+
+transitionSubTelas(0,1);
+
+//Sub telas do RLC's
+
+transitionSubTelas(2,3);

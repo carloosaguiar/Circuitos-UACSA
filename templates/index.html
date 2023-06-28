@@ -16,19 +16,11 @@
             <ul>
 
                 <li class="list-item">
-                    Circuitos RC's e RL's
+                    Função Transferencia H(s)
                 </li>
 
                 <li class="list-item">
-                    Circuitos RCL's
-                </li>
-
-                <li class="list-item">
-                    Item 2
-                </li>
-
-                <li class="list-item">
-                    Item 3
+                    Circuitos RLC's
                 </li>
 
             </ul>
@@ -36,9 +28,9 @@
 
         <!-- Telas de cada funcionalidade -->
 
-        <!-- Circuito RC e RL de 1ª Ordem -->
+        <!-- Função Transferencia -->
         <div class="screen-item" id="RcRl">
-           <h2>Circuitos RC e RL</h2>
+           <h2>Função Transferencia H(s)</h2>
 
            <div class="main">
                 <nav>
@@ -55,11 +47,7 @@
                             Polos e Zeros
                         </li>
 
-                        <li class="item-menu">
-                            Modo livre
-                        </li>
-
-                        <button class="info" style="background-color: transparent; border: none;"><img src="img/circle-question-solid.svg" style="width: 30px;"></button>
+                        <button class="info" style="background-color: transparent; border: none; cursor: pointer;"><img src="img/circle-question-solid.svg" style="width: 30px;"></button>
                     </ul>
                 </nav>
 
@@ -68,7 +56,7 @@
 
                         <div class="form">
                             <p>Ganho</p>
-                            <input type="text" id="ganho" value="1">
+                            <input type="number" id="ganho" value="1">
     
                             <p>Numerador</p>
                             <input type="text" id="numerador">
@@ -92,7 +80,15 @@
 
                                 <span>
                                     <p>Nº de pontos</p>
-                                    <input class="interval" type="number" value="1">
+                                    <input class="interval" type="number" value="20">
+                                </span>
+
+                                <span>
+                                    <p>Unidade</p>
+                                    <select class="unid">
+                                        <option value="rad-seg">Rad/seg</option>
+                                        <option value="Hz">Hz</option>
+                                    </select>
                                 </span>
                             </section>
                             <button class="button">Gerar Grafico</button>
@@ -100,7 +96,7 @@
     
                         <!-- Area onde vai as informações da resposta em frequencia -->
                         <div id="terminal" style="display: block;">
-                            <textarea name="ter" id="ter" cols="30" rows="10" disabled style="text-align: center; display: block;"></textarea>
+                            <textarea name="ter" id="ter" cols="30" rows="10" disabled style="text-align: left; display: block;"></textarea>
                         </div>
 
                     </div>
@@ -110,6 +106,9 @@
                     <div class="content">
 
                         <div class="form">
+                            <p>Ganho</p>
+                            <input type="number" value="1">
+
                             <p>Zeros</p>
                             <input type="text" id="zeros-poly">
     
@@ -121,17 +120,27 @@
                             <section class="omega-range">
                                 <span>
                                     <p>Freq. Inicial</p>
+                                    <span>10^</span>
                                     <input class="init-freq" type="number" value="0">
-                                </span> 
-
-                                <span>
-                                    <p>Freq. Final</p>
-                                    <input class="end-freq"type="number" value="0">
                                 </span>
 
                                 <span>
-                                    <p>Nº de Pontos</p>
-                                    <input class="interval" type="number" value="1">
+                                    <p>Freq. Final</p>
+                                    <span>10^</span>
+                                    <input class="end-freq" type="number" value="0">
+                                </span>
+
+                                <span>
+                                    <p>Nº de pontos</p>
+                                    <input class="interval" type="number" value="20">
+                                </span>
+
+                                <span>
+                                    <p>Unidade</p>
+                                    <select class="unid">
+                                        <option value="rad-seg">Rad/seg</option>
+                                        <option value="Hz">Hz</option>
+                                    </select>
                                 </span>
                             </section>
 
@@ -140,20 +149,17 @@
     
                         <!-- Area onde vai as informações da resposta em frequencia -->
                         <div style="display: block;">
-                            <textarea name="ter" id="ter2" cols="30" rows="10" disabled style="text-align: center; display: block; width: 100%; height:60vh;"></textarea>
+                            <textarea name="ter" id="ter2" cols="30" rows="10" disabled style="text-align: left; display: block; width: 100%; height:60vh;"></textarea>
                         </div>
 
                     </div>
                 </div>
-
-                <div class="sub-tela" style="display: none;">
-
-                </div>
            </div>
         </div>
 
-        <div class="screen-item" id="Rcl">
-           <h2>Circuitos RCL</h2>
+        <!-- Circuito RLC -->
+        <div class="screen-item" id="rlc">
+           <h2>Circuitos RLC's</h2>
 
            <div class="main">
                 <nav>
@@ -162,31 +168,170 @@
                             Voltar
                         </li>
 
-                        <li>
-                            Polinomio
+                        <li class="item-menu active">
+                            RLC Série
                         </li>
 
-                        <li>
-                            Polos e Zeros
-                        </li>
-
-                        <li>
-                            Modo livre
+                        <li class="item-menu">
+                            RLC Paralelo
                         </li>
                     </ul>
                 </nav>
+
+                <div class="sub-tela" id="serie">
+
+                    <div class="content">
+                        <section class="sessao" id="config">
+                            <p>Tensão de saída</p>
+                            <select id="dispositivo">
+                                <option value="Vr">Resistor (Vr)</option>
+                                <option value="Vl">Indutor (Vl)</option>
+                                <option value="Vc">Capacitor (Vc)</option>
+                                <option value="Vlc">Capac. + Indu. (Vlc)</option>
+                            </select>
+    
+                            <img src="img/RLC-s.jpg">
+    
+                            <select id="unidFreq">
+                                <option value="rad-seg">Rad/seg</option>
+                                <option value="hz">Hz</option>
+                            </select>
+                        </section>
+    
+                        <section class="sessao" id="dataInput">
+                            <div class="input-group">
+                                <p>Valor do Resistor</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GΩ</option>
+                                    <option value="10**6">MΩ</option>
+                                    <option value="10**3">KΩ</option>
+                                    <option value="1" selected>Ω</option>
+                                    <option value="10**-3">mΩ</option>
+                                    <option value="10**-6">uΩ</option>
+                                    <option value="10**-9">nΩ</option>
+                                </select>
+                            </div>
+    
+                            <div class="input-group">
+                                <p>Valor do Indutor</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GH</option>
+                                    <option value="10**6">MH</option>
+                                    <option value="10**3">KH</option>
+                                    <option value="1" selected>H</option>
+                                    <option value="10**-3">mH</option>
+                                    <option value="10**-6">uH</option>
+                                    <option value="10**-9">nH</option>
+                                </select>
+                            </div>
+    
+                            <div class="input-group">
+                                <p>Valor do Capacitor</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GC</option>
+                                    <option value="10**6">MC</option>
+                                    <option value="10**3">KC</option>
+                                    <option value="1" selected>C</option>
+                                    <option value="10**-3">mC</option>
+                                    <option value="10**-6">uC</option>
+                                    <option value="10**-9">nC</option>
+                                </select>
+                            </div>
+    
+                            <button>Gerar H(s)</button>
+                            <button>Plotar Grafico</button>
+    
+                        </section>
+    
+                        <section class="sessao">
+                            <textarea disabled id="ter3" cols="30" rows="10" style="height: 400px; width: 310px;"></textarea>
+                        </section>
+
+                    </div>
+
+                </div>
+     
+                <div class="sub-tela" id="paralelo" style="display: none;">
+                    <div class="content">
+                        <section class="sessao" id="config">
+                            <p>Tensão de saída</p>
+                            <select id="dispositivo">
+                                <option value="Vr">Resistor (Vr)</option>
+                                <option value="Vl">Indutor (Vl)</option>
+                                <option value="Vc">Capacitor (Vc)</option>
+                                <option value="Vlc">Capac. + Indu. (Vlc)</option>
+                            </select>
+    
+                            <img src="img/RLC-p.png" style="width: 300px;">
+    
+                            <select id="unidFreq">
+                                <option value="rad-seg">Rad/seg</option>
+                                <option value="hz">Hz</option>
+                            </select>
+                        </section>
+    
+                        <section class="sessao" id="dataInput">
+                            <div class="input-group">
+                                <p>Valor do Resistor</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GΩ</option>
+                                    <option value="10**6">MΩ</option>
+                                    <option value="10**3">KΩ</option>
+                                    <option value="1" selected>Ω</option>
+                                    <option value="10**-3">mΩ</option>
+                                    <option value="10**-6">uΩ</option>
+                                    <option value="10**-9">nΩ</option>
+                                </select>
+                            </div>
+    
+                            <div class="input-group">
+                                <p>Valor do Indutor</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GH</option>
+                                    <option value="10**6">MH</option>
+                                    <option value="10**3">KH</option>
+                                    <option value="1" selected>H</option>
+                                    <option value="10**-3">mH</option>
+                                    <option value="10**-6">uH</option>
+                                    <option value="10**-9">nH</option>
+                                </select>
+                            </div>
+    
+                            <div class="input-group">
+                                <p>Valor do Capacitor</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GC</option>
+                                    <option value="10**6">MC</option>
+                                    <option value="10**3">KC</option>
+                                    <option value="1" selected>C</option>
+                                    <option value="10**-3">mC</option>
+                                    <option value="10**-6">uC</option>
+                                    <option value="10**-9">nC</option>
+                                </select>
+                            </div>
+    
+                            <button>Gerar H(s)</button>
+                            <button>Plotar Grafico</button>
+    
+                        </section>
+    
+                        <section class="sessao">
+                            <textarea disabled id="ter3" cols="30" rows="10" style="height: 400px; width: 310px;"></textarea>
+                        </section>
+
+                    </div>
+                </div>
            </div>
         </div>
 
-        <div class="screen-item" id="Spec1">
-            <h2>Spec1</h2>
-        </div>
-
-        <div class="screen-item" id="Spec2">
-            <h2>Spec2</h2>
-        </div>
-
     </main>
+
     <div id="info">
         <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</h3>
     </div>
@@ -194,7 +339,8 @@
 
     <!-- Area para adicionar os scripts JS -->
     <script src="js/transitionScreen.js"></script>
-    <script src="js/RcRl.js"></script>
+    <script src="js/H_s.js"></script>
     <script src="js/generic.js"></script>
+    <script src="js/rlc.js"></script>
 </body>
 </html>

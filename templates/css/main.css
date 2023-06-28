@@ -1,4 +1,4 @@
-@import url(./RLRL.css);
+@import url(./Hs.css);
 @import url(./RCL.css);
 
 *{
@@ -102,9 +102,12 @@ main nav ul .list-item:hover{
     display: block;
 }
 
-.popup-text{
-    position: relative;
-    overflow-y: scroll;
-    width: 98%;
-    height: 350px;
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+
 }

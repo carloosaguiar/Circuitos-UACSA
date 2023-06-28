@@ -1,36 +1,38 @@
-.screen-item{
+#rlc{
     position: relative;
     width: 100%;
     height: 96%;
 }
 
-.screen-item h2{
+#rlc h2{
     text-align: center;
     font-style: normal;
     font-size: 2em;
 }
 
-.screen-item .main{
-    margin-top: 10px;
+#rlc .main{
     display: flex;
     width: 100%;
     justify-content: space-around;
-    align-items: center;
     flex-wrap: wrap;
 }
 
-.screen-item .main nav{
-    width: 80%;
-    margin-top: -200px;
+#rlc .main nav{
+    width: 70%;
 }
 
-.screen-item .main nav ul{
+#rlc .main nav ul{
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
 
-.screen-item .main nav ul li{
+#rlc .main nav ul .active{
+    color: aliceblue;
+    background-color: #1fbf77;
+}
+
+#rlc .main nav ul li{
     padding: 10px;
     color: #1fbf77;
     font-weight: bold;
@@ -38,8 +40,106 @@
     transition: 0.2s ease-out;
 }
 
-.screen-item .main nav ul li:hover{
+#rlc .main nav ul li:hover{
     cursor: pointer;
     color: aliceblue;
     background-color: #1fbf77;
+}
+
+/* circuito RLC série */
+
+#serie{
+    position: relative;
+    width: 100%;
+}
+
+#rlc .main #serie .content{
+    position: absolute;
+    top: 0;
+    width: 95%;
+    height: 500px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#rlc .main #serie .content .sessao{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#rlc .main #serie .content #dataInput .input-group{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#rlc .main #serie .content #dataInput .input-group input{
+    width: 60%;
+    padding: 5px;
+    margin-top: -50px;
+}
+
+#rlc .main #serie .content #dataInput .input-group select{
+    padding: 5.5px;
+    margin-top: -50px;
+}
+
+#rlc .main #serie .content #dataInput button{
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#rlc .main #serie .content #config select{
+    padding: 5px;
+}
+
+/* circuito RLC paralelo */
+
+#paralelo{
+    position: relative;
+    width: 100%;
+}
+
+#rlc .main #paralelo .content{
+    position: absolute;
+    top: 0;
+    width: 95%;
+    height: 500px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#rlc .main #paralelo .content .sessao{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#rlc .main #paralelo .content #dataInput .input-group{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#rlc .main #paralelo .content #dataInput .input-group input{
+    width: 60%;
+    padding: 5px;
+    margin-top: -50px;
+}
+
+#rlc .main #paralelo .content #dataInput .input-group select{
+    padding: 5.5px;
+    margin-top: -50px;
+}
+
+#rlc .main #paralelo .content #dataInput button{
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#rlc .main #paralelo .content #config select{
+    padding: 5px;
 }
