@@ -11,16 +11,14 @@
 }
 
 #rlc .main{
-    margin-top: 10px;
     display: flex;
     width: 100%;
     justify-content: space-around;
-    align-items: center;
     flex-wrap: wrap;
 }
 
 #rlc .main nav{
-    width: 80%;
+    width: 70%;
 }
 
 #rlc .main nav ul{
@@ -48,7 +46,49 @@
     background-color: #1fbf77;
 }
 
-#rlc .main .sub-tela{
+#serie{
+    position: relative;
+    width: 100%;
+}
+
+#rlc .main #serie .content{
+    position: absolute;
+    top: 0;
+    width: 95%;
+    height: 500px;
     display: flex;
-    align-items: flex-start;
+    justify-content: space-around;
+}
+
+#rlc .main #serie .content .sessao{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#rlc .main #serie .content #dataInput .input-group{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#rlc .main #serie .content #dataInput .input-group input{
+    width: 60%;
+    padding: 5px;
+    margin-top: -50px;
+}
+
+#rlc .main #serie .content #dataInput .input-group select{
+    padding: 5.5px;
+    margin-top: -50px;
+}
+
+#rlc .main #serie .content #dataInput button{
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#rlc .main #serie .content #config select{
+    padding: 5px;
 }

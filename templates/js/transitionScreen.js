@@ -39,34 +39,29 @@ for(let i = 0; i <= options.length-1; i++){
 
 //menu das sub telas
 
-//Sub telas do H(s)
-let item_menu = document.getElementsByClassName('item-menu');
-let sub_tela = document.getElementsByClassName('sub-tela');
+function transitionSubTelas(inicio, fim){
 
-for(let i = 0; i <= 2; i++){
-    item_menu[i].onclick = () =>{
+    let item_menu = document.getElementsByClassName('item-menu');
+    let sub_tela = document.getElementsByClassName('sub-tela');
 
-        for(j = 0; j <= 2; j++){
-            sub_tela[j].style.display = 'none';
-            item_menu[j].classList.remove('active')
+    for(let i = inicio; i <= fim; i++){
+        item_menu[i].onclick = () =>{
+    
+            for(j = inicio; j <= fim; j++){
+                sub_tela[j].style.display = 'none';
+                item_menu[j].classList.remove('active')
+            }
+    
+            sub_tela[i].style.display = 'block';
+            item_menu[i].classList.add('active')
         }
-
-        sub_tela[i].style.display = 'block';
-        item_menu[i].classList.add('active')
     }
 }
+
+//Sub telas do H(s)
+
+transitionSubTelas(0,1);
 
 //Sub telas do RLC's
 
-for(let i = 3; i <= 4; i++){
-    item_menu[i].onclick = () =>{
-
-        for(j = 3; j <= 4; j++){
-            sub_tela[j].style.display = 'none';
-            item_menu[j].classList.remove('active')
-        }
-
-        sub_tela[i].style.display = 'block';
-        item_menu[i].classList.add('active')
-    }
-}
+transitionSubTelas(2,3);

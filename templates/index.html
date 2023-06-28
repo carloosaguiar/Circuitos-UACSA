@@ -47,11 +47,7 @@
                             Polos e Zeros
                         </li>
 
-                        <li class="item-menu">
-                            Modo Projeto
-                        </li>
-
-                        <button class="info" style="background-color: transparent; border: none;"><img src="img/circle-question-solid.svg" style="width: 30px;"></button>
+                        <button class="info" style="background-color: transparent; border: none; cursor: pointer;"><img src="img/circle-question-solid.svg" style="width: 30px;"></button>
                     </ul>
                 </nav>
 
@@ -158,25 +154,6 @@
 
                     </div>
                 </div>
-
-                <div class="sub-tela" style="display: none;">
-                    <div id="projeto">
-                        <section id="painel-control">
-                            <div id="button-area">
-                                <button>Adicionar Resistor</button>
-                                <button>Adicionar Capacitor</button>
-                                <button>Adicionar Indutor</button>
-                            </div>
-
-                            <div id="input-data">
-
-                            </div>
-
-                            <textarea id="modelagem" cols="30" rows="10"></textarea>
-                        </section>
-                        <textarea id="ter3" cols="30" rows="10" style="width: 30%; height: 400px;"></textarea>
-                    </div>
-                </div>
            </div>
         </div>
 
@@ -201,18 +178,79 @@
                     </ul>
                 </nav>
 
-                <div class="sub-tela">
-                    <div class="button-area">
-                        <button>Adicionar Resistor</button>
+                <div class="sub-tela" id="serie">
+                    <div class="content">
+                        <section class="sessao" id="config">
+                            <p>Tensão de saída</p>
+                            <select id="dispositivo">
+                                <option value="Vr">Resistor (Vr)</option>
+                                <option value="Vl">Indutor (Vl)</option>
+                                <option value="Vc">Capacitor (Vc)</option>
+                                <option value="Vlc">Capac. + Indu. (Vlc)</option>
+                            </select>
+    
+                            <img src="img/RLC-s.jpg">
+    
+                            <select id="unidFreq">
+                                <option value="rad-seg">Rad/seg</option>
+                                <option value="hz">Hz</option>
+                            </select>
+                        </section>
+    
+                        <section class="sessao" id="dataInput">
+                            <div class="input-group">
+                                <p>Valor do Resistor</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GΩ</option>
+                                    <option value="10**6">MΩ</option>
+                                    <option value="10**3">KΩ</option>
+                                    <option value="1" selected>Ω</option>
+                                    <option value="10**-3">mΩ</option>
+                                    <option value="10**-6">uΩ</option>
+                                    <option value="10**-9">nΩ</option>
+                                </select>
+                            </div>
+    
+                            <div class="input-group">
+                                <p>Valor do Indutor</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GH</option>
+                                    <option value="10**6">MH</option>
+                                    <option value="10**3">KH</option>
+                                    <option value="1" selected>H</option>
+                                    <option value="10**-3">mH</option>
+                                    <option value="10**-6">uH</option>
+                                    <option value="10**-9">nH</option>
+                                </select>
+                            </div>
+    
+                            <div class="input-group">
+                                <p>Valor do Capacitor</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GC</option>
+                                    <option value="10**6">MC</option>
+                                    <option value="10**3">KC</option>
+                                    <option value="1" selected>C</option>
+                                    <option value="10**-3">mC</option>
+                                    <option value="10**-6">uC</option>
+                                    <option value="10**-9">nC</option>
+                                </select>
+                            </div>
+    
+                            <button>Gerar H(s)</button>
+                            <button>Plotar Grafico</button>
+    
+                        </section>
+    
+                        <section class="sessao">
+                            <textarea disabled id="ter3" cols="30" rows="10" style="height: 400px; width: 310px;"></textarea>
+                        </section>
 
-                        <button>Adicionar Capacitor</button>
-
-                        <button>Adicionar Indutor</button>
                     </div>
 
-                    <div>
-                        
-                    </div>
                 </div>
      
                 <div class="sub-tela" style="display: none;">
@@ -232,5 +270,6 @@
     <script src="js/transitionScreen.js"></script>
     <script src="js/H_s.js"></script>
     <script src="js/generic.js"></script>
+    <script src="js/rlc.js"></script>
 </body>
 </html>

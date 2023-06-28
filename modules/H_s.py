@@ -3,18 +3,23 @@ import numpy as np
 import matplotlib.pylab as plt
 import control
 
+def CalculateFreqCorte(sys):
+
+    mag, phase, omega = control.bode(sys, plot=False)
+
+    #calcular a frequencia de corte
+    mag_corte = max(mag)/(2**0.5)
+    diference_array = np.absolute(mag - mag_corte)
+    index = diference_array.argmin()
+
+    return omega[index]
+
 def info(ganho: float, numerador: list, denominador: list):
     sys = ganho * control.tf(numerador, denominador)
     polos = str(np.round(control.pole(sys), 2).tolist())
     zeros = str(np.round(control.zero(sys), 2).tolist())
 
-    mag, phase, omega = control.bode(sys, plot=False)
-
-    mag_corte = 3
-    diference_array = np.absolute(mag - mag_corte)
-    index = diference_array.argmin()
-
-    freq_corte = omega[index]
+    freq_corte = CalculateFreqCorte(sys)
 
     return str(sys), zeros, polos, freq_corte
 
