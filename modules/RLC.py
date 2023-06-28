@@ -23,64 +23,55 @@ def info_serie(R,L,C, visual):
 
     #Estudo de caso
     if(visual == 'Vc'):
+        ganho = 1/(L*C)
+
         if(R == 0):
-            ganho = 1/(L*C)
             Hs = control.tf([1],[1,0,ganho])
-            freq_corte = CalculateFreqCorte(Hs)
 
         elif(L == 0):
             ganho = 1/(R*C)
             Hs = control.tf([1],[1,ganho])
-            freq_corte = CalculateFreqCorte(Hs)
+            
+        else:   
+            Hs = control.tf([1],[1,(R/L),ganho])
+
+    if(visual == 'Vl'):
+        ganho = 1
+
+        if(R == 0):
+            Hs = control.tf([1,0,0],[1,0,(1/(C*L))])
+
+        elif(C == 0):
+            Hs = control.tf([1,0],[1,(R/L)])
             
         else:
-            ganho = 1/(L*C)   
-            Hs = control.tf([1],[1,(R/L),ganho])
-            freq_corte = CalculateFreqCorte(Hs)
-        
+            Hs = control.tf([1,0,0],[1,(R/L),(1/(C*L))])
 
-    elif(visual == 'Vl'):
-        ganho
-        Hs
-        freq_corte
+    if(visual == 'Vr'):
+        ganho = R/L
 
-    elif(visual == 'Vr'):
-        ganho
-        Hs
-        freq_corte
+        if(C == 0):
+            Hs = control.tf([1],[1,(1/(R/L))])
+
+        elif(L == 0):
+            ganho = 1
+            Hs = control.tf([1,0],[1,(1/(R*C))])
+            
+        else:
+            Hs = control.tf([1,0],[1,(R/L),(1/(C*L))])
     
-    elif(visual == 'Vlc'):
-        ganho
-        Hs
-        freq_corte
+    if(visual == 'Vlc'):
+        ganho = 1
+        Hs = control.tf([1,0,(1/(C*L))], [1,(R/L),(1/(C*L))])
+
+    freq_corte = CalculateFreqCorte(Hs)
     
     return ganho, str(Hs), freq_corte
 
-def info_RLC_paralelo(R,L,C, visual):
+def info_RLC_paralelo(R1,R2,L,C):
 
-    match visual:
-        case "Vr":
-            ganho = R/L
-            dem = 0
+    ganho = 1/(C*R1)
 
-            Hs = control.tf([1],dem)
+    Hs = control.tf([1, 0],[1, (R1+R2)/(C*R1*R2), 1/(C*L)])
 
-            freq_corte = CalculateFreqCorte(Hs)
-
-        case "Vl":
-            ganho = 1
-            dem = 0
-
-            Hs = control.tf([1,0,0],dem)
-
-            freq_corte = CalculateFreqCorte(Hs)
-
-        case "Vc":
-            ganho = 1/(C*L)
-            dem = 0
-
-            Hs = control.tf([1],dem)
-
-            freq_corte = CalculateFreqCorte(Hs)
-
-    return 0
+    return ganho, str(Hs)

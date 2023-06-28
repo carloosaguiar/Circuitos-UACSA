@@ -46,6 +46,8 @@
     background-color: #1fbf77;
 }
 
+/* circuito RLC série */
+
 #serie{
     position: relative;
     width: 100%;
@@ -90,5 +92,54 @@
 }
 
 #rlc .main #serie .content #config select{
+    padding: 5px;
+}
+
+/* circuito RLC paralelo */
+
+#paralelo{
+    position: relative;
+    width: 100%;
+}
+
+#rlc .main #paralelo .content{
+    position: absolute;
+    top: 0;
+    width: 95%;
+    height: 500px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#rlc .main #paralelo .content .sessao{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#rlc .main #paralelo .content #dataInput .input-group{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#rlc .main #paralelo .content #dataInput .input-group input{
+    width: 60%;
+    padding: 5px;
+    margin-top: -50px;
+}
+
+#rlc .main #paralelo .content #dataInput .input-group select{
+    padding: 5.5px;
+    margin-top: -50px;
+}
+
+#rlc .main #paralelo .content #dataInput button{
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#rlc .main #paralelo .content #config select{
     padding: 5px;
 }
