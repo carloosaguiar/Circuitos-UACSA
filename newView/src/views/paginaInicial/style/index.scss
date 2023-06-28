@@ -1,0 +1,127 @@
+@import "./../../../App.scss";
+
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.layoutMenu{
+    background-color: $background-color !important;
+}
+
+
+
+.cardMenu{
+    border: none !important;
+    box-shadow: none !important;
+    
+    button {
+        //background: rgb(34,193,195);
+background:linear-gradient(0deg, rgba(163,189,173,1) 0%, rgba(125,171,132,1) 62%, rgba(176,196,172,1) 100%);
+ }
+    button:hover {
+        background-color: $primary-color !important;
+    }
+    .ant-card-body{
+        display: flex !important;
+        flex-direction: column !important;
+        background-color: $background-color !important;
+        button {
+            margin-bottom: 10px !important;
+        }
+    }
+    
+}
+
+.containerRectangle::before {
+  position: absolute !important;
+  top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+  background-image: url("../../../images/backg.jpg") !important;
+  opacity: 0.2 !important;
+  content: "";
+}
+
+.containerRectangle {
+   
+  position: relative;
+
+  width: 45%;
+ 
+  
+ 
+}
+
+.divCarrousel {
+  width: 30vh !important;
+}
+
+.carrousel{
+  width: 100% !important;
+  display: flex;
+  justify-content: left;
+  height: 100% !important;
+  div {
+    bottom: 15% !important;
+   display: flex;
+  justify-content: left;
+  align-items: center !important;
+  width: 93% !important;
+  height: 100% !important;
+ 
+  }
+}
+
+
+.imgGallery {
+  border-radius: 15px !important;
+  background: none !important;
+  mix-blend-mode: multiply !important;
+  .ant-card-img {
+    mix-blend-mode: multiply !important;
+      width: 15px  !important;
+      background: none !important;
+    }
+}
+.contentMenu {
+    margin: 20% !important;
+    
+}
+
+.header {
+  background-color: $primary-color;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+  .ant-typography {
+    margin-top: 5px !important;
+    font-family: $font-header !important;
+    //width: 100% !important;
+    font-size: 24px !important;
+    white-space: nowrap !important;
+  }
+}
+
+.uacsaIcon {
+    mix-blend-mode: multiply !important;
+}
+
+.footer{
+    text-align: center !important;
+    background-color: $primary-color !important;
+    font-family: $font-header !important;
+    height: 35px !important;
+    padding: 0px !important;
+    padding-top: 8px !important;
+
+}
+

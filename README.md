@@ -1,32 +1,29 @@
-# Circuito Soft
+Navegando entre projetos
 
-Um programa voltado à auxiliar os estudantes de engenharia elétrica na analise de circuitos elétricos focado atualmente mais em analise de resposta em frequencia de filtros.
+Primeiro acesso ao repositório: 
 
-## Instalando
+ACESSO AO REACT
 
-Como o software ainda está na fase de desenvolvimento ainda não é possivel fazer um instalador, logo o ideal é que baixe o código do repositorio e execute na maquina local.
+1 - Acessar pasta newView no cmd
+ # cd newView
+ # npm i  -- Instala dependencias
 
-### 1º Passo
+2- Start em aplicação para view total (modo producao)
+ # npm start
+Irá abrir uma aplicação desktop e poderá ser acessado também pelo endereço localhost:3000
 
-Baixe o código que está no repositorio e instale o Python 3.11.0 e pip 23.1.2 (utilizados no desenvolvimentop), em sequencia instale a biblioteca EEL Python (de preferência no cmd em modo administrador)
-    pip install eel
-    pip install pycurl
-    pip3 install numpy
-    pip install matplotlib
-    pip install control
+3 - Start em aplicação para alteração (modo desenvolvimento), abrir dois terminais
+ # npm run dev  em um terminal 
+ 
+ # python backend/app.py no outro terminal  (Inicia o servidor python, após cada alteração no código python, iniciar    novamente)
+    
 
-### 2º Passo 
+ACESSO AO PROJETO ORIGINAL
 
-Instalar o NodeJs
-link: https://nodejs.org/en
-versão: 18.16.0
+1 - Acessar pasta firstView no cmd
+ # cd firstView
+ # pip install -r requirements.txt  (Instala dependencias solicitadas no readme do projeto)
+ Caso não conseguir, instalar manualmente o que está no readme do projeto
 
-Abre o CMD e digite:
-
-    cd * caminho da pasta *
-
-### 3º Passo
-
-Execute o arquivo main.py:
-
-    python main.py
+2 - Inicia projeto
+ # python main.py
