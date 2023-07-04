@@ -256,24 +256,23 @@
      
                 <div class="sub-tela" id="paralelo" style="display: none;">
                     <div class="content">
-                        <section class="sessao" id="config">
-                            <p>Tensão de saída</p>
-                            <select id="dispositivo">
-                                <option value="Vr">Resistor (Vr)</option>
-                                <option value="Vl">Indutor (Vl)</option>
-                                <option value="Vc">Capacitor (Vc)</option>
-                                <option value="Vlc">Capac. + Indu. (Vlc)</option>
-                            </select>
+                        <section class="sessao" id="config2">
     
-                            <img src="img/RLC-p.png" style="width: 300px;">
+                            <img src="img/RLC-p.png" style="width: 400px; height: 200px;">
     
-                            <select id="unidFreq">
+                            <select id="unidFreq2">
                                 <option value="rad-seg">Rad/seg</option>
                                 <option value="hz">Hz</option>
                             </select>
+
+                            <select id="dispositivo2">
+                                <option value="Vr">Calular H(s)</option>
+                                <option value="Vl">Medir "C" a partir da banda</option>
+                                <option value="Vc">Medir "L" a partir da banda</option>
+                            </select>
                         </section>
     
-                        <section class="sessao" id="dataInput">
+                        <section class="sessao" id="dataInput2">
                             <div class="input-group">
                                 <p>Valor do Resistor</p>
                                 <input type="number" value="1">
