@@ -17,7 +17,7 @@ eel.init('templates')
 def info_sys(ganho, numerador, denominador):
     sys, zeros, polos, freq_corte = H_s.info(ganho, numerador, denominador)
 
-    return sys, zeros, polos, freq_corte
+    return str(sys), zeros, polos, freq_corte
 
 @eel.expose
 def plot_Hs(ganho, num, den, raio):
@@ -27,15 +27,21 @@ def plot_Hs(ganho, num, den, raio):
 def gerar_poly(options, zeros, polos, raio):
     sys = H_s.generate_poly(options, zeros, polos, raio)
 
-    return sys
+    return str(sys)
 
 #Funções do RLC
-@eel.expose
-def rlcInfo(R,L,C, visual):
-    ganho, hs, freq_corte = RLC.info_serie(R,L,C, visual)
 
-    return ganho, hs, freq_corte
-    
+@eel.expose
+def rlcInfoSerie(R,L,C, visual):
+    hs, freq_corte = RLC.info_serie(R,L,C, visual)
+
+    return str(hs), freq_corte
+
+@eel.expose
+def rlcPlotSerie(R,L,C, visual, freq):
+    hs, freq_corte = RLC.info_serie(R,L,C, visual)
+    RLC.plotSYS(hs, freq)
+
 
 #======= STARTA A APLICAÇÃO ========
 eel.start('index.html', size = (1200, 800))

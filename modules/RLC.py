@@ -23,55 +23,67 @@ def info_serie(R,L,C, visual):
 
     #Estudo de caso
     if(visual == 'Vc'):
-        ganho = 1/(L*C)
 
         if(R == 0):
-            Hs = control.tf([1],[1,0,ganho])
+            ganho = 1/(L*C)
+            Hs = ganho*control.tf([1],[1,0,ganho])
 
         elif(L == 0):
             ganho = 1/(R*C)
-            Hs = control.tf([1],[1,ganho])
+            Hs = ganho*control.tf([1],[1,ganho])
             
         else:   
-            Hs = control.tf([1],[1,(R/L),ganho])
+            ganho = 1/(L*C)
+            Hs = ganho*control.tf([1],[1,(R/L),ganho])
 
     if(visual == 'Vl'):
         ganho = 1
 
         if(R == 0):
-            Hs = control.tf([1,0,0],[1,0,(1/(C*L))])
+            Hs = ganho*control.tf([1,0,0],[1,0,(1/(C*L))])
 
         elif(C == 0):
-            Hs = control.tf([1,0],[1,(R/L)])
+            Hs = ganho*control.tf([1,0],[1,(R/L)])
             
         else:
-            Hs = control.tf([1,0,0],[1,(R/L),(1/(C*L))])
+            Hs = ganho*control.tf([1,0,0],[1,(R/L),(1/(C*L))])
 
     if(visual == 'Vr'):
-        ganho = R/L
 
         if(C == 0):
-            Hs = control.tf([1],[1,(1/(R/L))])
+            ganho = R/L
+            Hs = ganho*control.tf([1],[1,(1/(R/L))])
 
         elif(L == 0):
             ganho = 1
-            Hs = control.tf([1,0],[1,(1/(R*C))])
+            Hs = ganho*control.tf([1,0],[1,(1/(R*C))])
             
         else:
-            Hs = control.tf([1,0],[1,(R/L),(1/(C*L))])
+            ganho = R/L
+            Hs = ganho*control.tf([1,0],[1,(R/L),(1/(C*L))])
     
     if(visual == 'Vlc'):
         ganho = 1
-        Hs = control.tf([1,0,(1/(C*L))], [1,(R/L),(1/(C*L))])
+        Hs = ganho*control.tf([1,0,(1/(C*L))], [1,(R/L),(1/(C*L))])
 
     freq_corte = CalculateFreqCorte(Hs)
     
-    return ganho, str(Hs), freq_corte
+    return Hs, freq_corte
 
 def info_RLC_paralelo(R1,R2,L,C):
 
     ganho = 1/(C*R1)
 
-    Hs = control.tf([1, 0],[1, (R1+R2)/(C*R1*R2), 1/(C*L)])
+    Hs = ganho*control.tf([1, 0],[1, (R1+R2)/(C*R1*R2), 1/(C*L)])
 
-    return ganho, str(Hs)
+    return Hs
+
+def plotSYS(sys, freq):
+
+    hz = None
+
+    if freq == 'hz':
+       hz = True
+
+    control.bode(sys, dB=True, Hz=hz)
+    plt.show()
