@@ -26,8 +26,12 @@ def gera_polinomio() :
 
     sys, resultadoPolo, resultadoZeros = info(ganho, numerador, denominador)
     resulSys = re.sub(r"[-\n]", " ", sys)
+    # Dividir a string1 em uma lista
+    lista1 = re.split(r'\s{2,}', resulSys)
+    # Remover elementos vazios da lista1
+    lista1 = [item.strip() for item in lista1 if item]
     dataJson = {
-        'funcaoTranferencia': re.findall(r"\d+\s*s\s*\+\s*\d+", resulSys),
+        'funcaoTranferencia': lista1,
         'zeros': resultadoZeros,
         'polos':resultadoPolo
         

@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pylab as plt
 import control
+import re
 
 def info(ganho: float, numerador: list, denominador: list):
     sys = ganho * control.tf(numerador, denominador)
@@ -22,3 +23,11 @@ def info(ganho: float, numerador: list, denominador: list):
 
 #     }
 #     return dataJson
+chamada = info(8,[8,6],[9,9])
+resulSys = re.sub(r"[-\n]", " ", chamada[0])
+# Dividir a string1 em uma lista
+lista1 = re.split(r'\s{2,}', resulSys)
+# Remover elementos vazios da lista1
+lista1 = [item.strip() for item in lista1 if item]
+#formatRe = re.findall(padrao, resulSys),
+print(lista1)

@@ -1,18 +1,58 @@
 import { Button, Card, Col, Divider, Form, Input, Row, Typography } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import "./style/index.scss";
 const { Text } = Typography;
 
 const Polinomio = () => {
   const [numerador, setNumerador] = useState("oi");
   const [denominador, setDenominador] = useState("oi");
   const [form] = Form.useForm();
+  const [atualizarLargura, setAtualizarLargura] = useState(false);
+  const [larguraDivider, setLarguraDivider] = useState(0);
+  const numeroSuperiorRef: any = useRef(null);
+  const numeroInferiorRef: any = useRef(null);
+
   let navigate = useNavigate();
-  useEffect(() => {
-    //eel.set_host("ws://localhost:8000");
-  });
+
+  useLayoutEffect(() => {
+    if (atualizarLargura) {
+      const numeroSuperior = numeroSuperiorRef.current;
+      const numeroInferior = numeroInferiorRef.current;
+
+      if (numeroSuperior && numeroInferior) {
+        const tamanhoNumeroSuperior = numeroSuperior.offsetWidth;
+        const tamanhoNumeroInferior = numeroInferior.offsetWidth;
+        const novaLarguraDivider = Math.max(
+          tamanhoNumeroSuperior,
+          tamanhoNumeroInferior
+        );
+
+        setLarguraDivider(novaLarguraDivider);
+      }
+
+      setAtualizarLargura(false);
+    }
+  }, [atualizarLargura]);
+
+  const ajustaTraço = async () => {
+    const numeroSuperior = numeroSuperiorRef.current;
+    const numeroInferior = numeroInferiorRef.current;
+
+    if (numeroSuperior && numeroInferior) {
+      const tamanhoNumeroSuperior = numeroSuperior.offsetWidth;
+      const tamanhoNumeroInferior = numeroInferior.offsetWidth;
+      const novaLarguraDivider = Math.max(
+        tamanhoNumeroSuperior,
+        tamanhoNumeroInferior
+      );
+      console.log("cima", numeroSuperiorRef.current);
+      console.log("baixo", numeroInferiorRef.current);
+
+      setLarguraDivider(novaLarguraDivider);
+    }
+  };
 
   const geraPolinomio = async (var1: any, var2: number[], var3: number[]) => {
     axios
@@ -23,11 +63,12 @@ const Polinomio = () => {
           "denominador[]": var3,
         },
       })
-      .then((response) => {
-        console.log("response", response.data);
+      .then(async (response) => {
+        ///console.log("response", response.data);
         setNumerador(response.data.funcaoTranferencia[0]);
         setDenominador(response.data.funcaoTranferencia[1]);
-        console.log("var2", response.data.funcaoTranferencia[0]);
+        setAtualizarLargura(true);
+        //console.log("var2", response.data.funcaoTranferencia[0]);
         //setData(response.data.message);
         // Faça o que desejar com os dados da resposta
       })
@@ -51,6 +92,8 @@ const Polinomio = () => {
 
     const data = await geraPolinomio(8, listaNumerador, listaDenominador);
     //setData(data.funcaoTransferencia)
+    setAtualizarLargura(true);
+
     console.log("resultado", data);
   };
   return (
@@ -83,10 +126,25 @@ const Polinomio = () => {
         </Row>
       </Form>
 
-      <Card title="Resultados" bordered={false} style={{ width: 200 }}>
-        <Text strong>{numerador}</Text>
-        <Divider style={{ color: "black" }} />
-        <Text strong>{denominador}</Text>
+      <Card
+        title="Resultados"
+        className="cardResultado"
+        bordered={false}
+        style={{ width: 200 }}
+      >
+        <Text strong className="numerador" ref={numeroSuperiorRef}>
+          {numerador}
+        </Text>
+        <div
+          style={{
+            width: `${larguraDivider}px`,
+            margin: "0 auto",
+            borderBottom: "1px solid black",
+          }}
+        />
+        <Text strong ref={numeroInferiorRef}>
+          {denominador}
+        </Text>
       </Card>
     </>
   );

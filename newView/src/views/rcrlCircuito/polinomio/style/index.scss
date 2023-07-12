@@ -1,0 +1,21 @@
+.numerador {
+    font-style: italic !important;
+}
+
+.dividerDivisao {
+     flex: 1 !important;
+    margin-top:  0px !important;
+    margin-bottom:  0px !important;
+    //width: 100% !important;
+    align-items: center !important;
+    //  transform-origin: center;
+    // transform: scale(0.2) !important;
+    border: 1px solid black !important;
+    opacity: 1;
+    background-color: black !important;
+}
+
+.cardResultado{
+    text-align: center !important;
+    
+}
