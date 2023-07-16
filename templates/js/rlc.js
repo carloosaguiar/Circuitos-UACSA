@@ -16,23 +16,37 @@ const [gerarHs, plotar] = document.querySelectorAll('.content > .sessao > button
 //terminal de informações
 const ter3 = document.getElementById('ter3');
 
-gerarHs.onclick = () =>{
+function printTerminal(){
+
     let dataInput = {
         Resistor: valorResistor.value * eval(escalaResistor.value),
         Indutor: valorIndutor.value * eval(escalaIndutor.value),
         Capacitor: valorCapacitor.value * eval(escalaCapacitor.value),
         saida: tenSaida.value
     }
-
+    
     eel.rlcInfoSerie(dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor, dataInput.saida)(data => {
+
+        if(freq.value == 'hz'){
+            data[1] = (data[1]/(2*Math.PI)).toFixed(2) + " Hz"
+        }else{
+            data[1] = (data[1]).toFixed(2) + " Rad/seg"
+        }
+
         ter3.value = `
 Polinomio H(s):
             ${data[0].replaceAll('\n','\n      ')}
-
+    
             ================================
-Frequencia de corte: ${data[1].toFixed(2)}
+ Frequencia de corte: ${data[1]}
         `
     })
+
+}
+
+gerarHs.onclick = () =>{
+
+    printTerminal(dataInput)
 }
 
 plotar.onclick = ()=>{
@@ -44,6 +58,8 @@ plotar.onclick = ()=>{
         saida: tenSaida.value,
         Frequencia: freq.value
     }
+
+    printTerminal(dataInput)
 
     eel.rlcPlotSerie(dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor, dataInput.saida, dataInput.Frequencia)
 }

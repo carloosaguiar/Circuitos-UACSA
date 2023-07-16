@@ -125,6 +125,7 @@ gerar_polinomio.onclick = () =>{
     let ganho = parseFloat(ganho_input.value);
     let num = convertToArrayNumber(num_input.value);
     let den = convertToArrayNumber(den_input.value);
+    let freq_inicial = document.getElementsByClassName('unid')[0].value;
 
     eel.info_sys(ganho, num, den)(async H => {
 
@@ -152,6 +153,12 @@ gerar_polinomio.onclick = () =>{
             `
         }
 
+        if(freq_inicial == 'Hz'){
+            data[3] = (data[3]/(2*Math.PI)).toFixed(2) + " Hz"
+        }else{
+            data[3] = (data[3]).toFixed(2) + " Rad/seg"
+        }
+
         terminal.value = `
         Polinomio H(s): 
         ${(data[0]).replaceAll('\n','\n                        ')}
@@ -161,7 +168,7 @@ gerar_polinomio.onclick = () =>{
 
         Zeros: ${zeros}
         Polos: ${polos}
-        Frequecia de Corte: ${data[3].toFixed(2)} Rad/seg
+        Frequecia de Corte: ${data[3]}
         ${obs}
         ${'='.repeat(30)}
         `;
