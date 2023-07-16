@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import "./style/index.scss";
 const { Text } = Typography;
 
-const Polinomio = () => {
+const Transferencia = () => {
+  const [form] = Form.useForm();
   const [numerador, setNumerador] = useState("oi");
   const [denominador, setDenominador] = useState("oi");
-  const [form] = Form.useForm();
   const [atualizarLargura, setAtualizarLargura] = useState(false);
   const [larguraDivider, setLarguraDivider] = useState(0);
   const numeroSuperiorRef: any = useRef(null);
@@ -149,4 +149,4 @@ const Polinomio = () => {
     </>
   );
 };
-export default Polinomio;
+export default Transferencia;

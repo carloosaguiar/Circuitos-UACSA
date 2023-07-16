@@ -11,3 +11,11 @@ $background-window-color: rgb(241, 241, 241);
 //hovers
 $primary-color-hover: #485a7f;
 $primary-color-hover-second: #2b384d;
+
+.ant-btn-primary {
+    background-color: $tertiary-color !important;
+}
+
+.ant-btn-default {
+    background-color: $primary-color !important;
+}

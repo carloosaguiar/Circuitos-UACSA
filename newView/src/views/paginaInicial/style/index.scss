@@ -89,8 +89,10 @@ background:linear-gradient(0deg, rgba(163,189,173,1) 0%, rgba(125,171,132,1) 62%
     }
 }
 .contentMenu {
-    margin: 20% !important;
-    
+    //margin: 20% !important;
+    display: grid !important;
+    //align-items: center !important;
+    align-content:  center !important;
 }
 
 .header {

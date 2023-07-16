@@ -106,15 +106,16 @@ const PaginaInicial = () => {
                 onClick={() => navigate("/polinomio")}
                 size="large"
               >
-                Circuito RC e RL
+                Função de transferência H(s)
               </Button>
               <Button
                 type="primary"
                 shape="round"
+                onClick={() => navigate("/rlcCircuit")}
                 //icon={<DownloadOutlined />}
                 size="large"
               >
-                Circuito RCL
+                Circuitos RLC's
               </Button>
               <Button
                 type="primary"
