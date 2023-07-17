@@ -70,11 +70,11 @@ def info_serie(R,L,C, visual):
     
     return Hs, freq_corte
 
-def info_RLC_paralelo(R1,R2,L,C):
+def info_RLC_paralelo(Rg,R,L,C): 
 
-    ganho = 1/(C*R1)
+    ganho = 1/(C*Rg)
 
-    Hs = ganho*control.tf([1, 0],[1, (R1+R2)/(C*R1*R2), 1/(C*L)])
+    Hs = ganho*control.tf([1, 0],[1, (Rg+R)/(C*Rg*R), 1/(C*L)])
 
     return Hs
 

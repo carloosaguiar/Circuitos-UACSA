@@ -32,7 +32,7 @@ def gerar_poly(options, zeros, polos, raio):
 #Funções do RLC
 
 @eel.expose
-def rlcInfoSerie(R,L,C, visual):
+def rlcInfoSerie(R,L,C, visual): 
     hs, freq_corte = RLC.info_serie(R,L,C, visual)
 
     return str(hs), freq_corte
@@ -41,6 +41,21 @@ def rlcInfoSerie(R,L,C, visual):
 def rlcPlotSerie(R,L,C, visual, freq):
     hs, freq_corte = RLC.info_serie(R,L,C, visual)
     RLC.plotSYS(hs, freq)
+
+@eel.expose
+def rlcInfoParalelo(Rg,R,L,C):
+
+    hs = RLC.info_RLC_paralelo(Rg,R,L,C)
+
+    return str(hs)
+
+@eel.expose
+def rlcPlotParalelo(Rg,R,L,C):
+
+    hs = RLC.info_RLC_paralelo(Rg,R,L,C)
+
+    RLC.plotSYS(hs, None)
+
 
 
 #======= STARTA A APLICAÇÃO ========

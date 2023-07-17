@@ -265,14 +265,12 @@
                                 <option value="hz">Hz</option>
                             </select>
 
-                            <select id="dispositivo2">
-                                <option value="Vr">Calular H(s)</option>
-                                <option value="Vl">Medir "C" e "R" a partir da banda</option>
-                                <option value="Vc">Medir "L" e "R" a partir da banda</option>
-                            </select>
+                            <button class="dispositivo2">Calular H(s)</button>
+                            <button class="dispositivo2">Medir "C" e "R" a partir da banda</button>
+                            <button class="dispositivo2">Medir "L" e "R" a partir da banda</button>
                         </section>
     
-                        <section class="sessao" id="dataInput2">
+                        <section class="sessao dataInput2" id="Hs">
 
                             <div class="input-group">
                                 <p>Valor de Rg</p>
@@ -330,13 +328,135 @@
                                 </select>
                             </div>
     
-                            <button>Gerar H(s)</button>
-                            <button>Plotar Grafico</button>
+                            <button>Simular</button>
+                        </section>
+
+                        <section class="sessao dataInput2" id="RC" style="display: none;">
+                            
+                            <div class="input-group">
+                                <p>Valor de Rg</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GΩ</option>
+                                    <option value="10**6">MΩ</option>
+                                    <option value="10**3">KΩ</option>
+                                    <option value="1" selected>Ω</option>
+                                    <option value="10**-3">mΩ</option>
+                                    <option value="10**-6">uΩ</option>
+                                    <option value="10**-9">nΩ</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <p>Freq-Resso (Rad/seg)</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">G</option>
+                                    <option value="10**6">M</option>
+                                    <option value="10**3">K</option>
+                                    <option value="1" selected></option>
+                                    <option value="10**-3">m</option>
+                                    <option value="10**-6">u</option>
+                                    <option value="10**-9">n</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <p>Banda (Rad/seg)</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">G</option>
+                                    <option value="10**6">M</option>
+                                    <option value="10**3">K</option>
+                                    <option value="1" selected></option>
+                                    <option value="10**-3">m</option>
+                                    <option value="10**-6">u</option>
+                                    <option value="10**-9">n</option>
+                                </select>
+                            </div>
     
+                            <div class="input-group">
+                                <p>Valor de L</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GH</option>
+                                    <option value="10**6">MH</option>
+                                    <option value="10**3">KH</option>
+                                    <option value="1" selected>H</option>
+                                    <option value="10**-3">mH</option>
+                                    <option value="10**-6">uH</option>
+                                    <option value="10**-9">nH</option>
+                                </select>
+                            </div>
+    
+                            <button>Simular</button>
+
+                        </section>
+
+                        <section class="sessao dataInput2" id="RL" style="display: none;">
+                            
+                            <div class="input-group">
+                                <p>Valor de Rg</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GΩ</option>
+                                    <option value="10**6">MΩ</option>
+                                    <option value="10**3">KΩ</option>
+                                    <option value="1" selected>Ω</option>
+                                    <option value="10**-3">mΩ</option>
+                                    <option value="10**-6">uΩ</option>
+                                    <option value="10**-9">nΩ</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <p>Freq-Resso (Rad/seg)</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">G</option>
+                                    <option value="10**6">M</option>
+                                    <option value="10**3">K</option>
+                                    <option value="1" selected></option>
+                                    <option value="10**-3">m</option>
+                                    <option value="10**-6">u</option>
+                                    <option value="10**-9">n</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <p>Banda (Rad/seg)</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">G</option>
+                                    <option value="10**6">M</option>
+                                    <option value="10**3">K</option>
+                                    <option value="1" selected></option>
+                                    <option value="10**-3">m</option>
+                                    <option value="10**-6">u</option>
+                                    <option value="10**-9">n</option>
+                                </select>
+                            </div>
+    
+                            <div class="input-group">
+                                <p>Valor de C</p>
+                                <input type="number" value="1">
+                                <select>
+                                    <option value="10**9">GF</option>
+                                    <option value="10**6">MF</option>
+                                    <option value="10**3">KF</option>
+                                    <option value="1" selected>F</option>
+                                    <option value="10**-3">mF</option>
+                                    <option value="10**-6">uF</option>
+                                    <option value="10**-9">nF</option>
+                                </select>
+                            </div>
+    
+                            <button>Simular</button>
+
                         </section>
     
                         <section class="sessao">
-                            <textarea disabled id="ter3" cols="30" rows="10" style="height: 400px; width: 310px;"></textarea>
+                            <textarea disabled id="ter4" cols="30" rows="10" style="height: 400px; width: 310px;"></textarea>
                         </section>
 
                     </div>
@@ -353,8 +473,8 @@
 
     <!-- Area para adicionar os scripts JS -->
     <script src="js/transitionScreen.js"></script>
-    <script src="js/H_s.js"></script>
     <script src="js/generic.js"></script>
+    <script src="js/H_s.js"></script>
     <script src="js/rlc.js"></script>
 </body>
 </html>

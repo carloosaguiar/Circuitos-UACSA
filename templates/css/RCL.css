@@ -119,27 +119,33 @@
     justify-content: space-around;
 }
 
-#rlc .main #paralelo .content #dataInput2 .input-group{
+#rlc .main #paralelo .content .dataInput2 .input-group{
     display: flex;
     flex-wrap: wrap;
 }
 
-#rlc .main #paralelo .content #dataInput2 .input-group input{
+#rlc .main #paralelo .content .dataInput2 .input-group input{
     width: 50%;
     padding: 5px;
     margin-top: -35px;
 }
 
-#rlc .main #paralelo .content #dataInput2 .input-group select{
+#rlc .main #paralelo .content .dataInput2 .input-group select{
     padding: 5.5px;
     margin-top: -35px;
 }
 
-#rlc .main #paralelo .content #dataInput2 button{
+#rlc .main #paralelo .content .dataInput2 button{
     padding: 5px;
     margin-bottom: 10px;
 }
 
 #rlc .main #paralelo .content #config2 select{
+    padding: 5px;
+}
+
+/* ============== */
+
+.dispositivo2{
     padding: 5px;
 }
