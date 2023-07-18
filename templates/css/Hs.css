@@ -66,6 +66,23 @@
     width: 40%;
 }
 
+#RcRl .main .sub-tela .form p{
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#RcRl .main .sub-tela .form .button{
+    padding: 10px;
+    margin-top: 5px;
+    color: aliceblue;
+    background-color: #1fbf77;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
 #RcRl .main .sub-tela #terminal #ter{
     margin-top: 20px;
     width: 100%;
@@ -88,4 +105,8 @@
 
 #RcRl .main .sub-tela .unid{
     padding: 10px;
+    background-color: #1fbf77;
+    color: aliceblue;
+    font-weight: bold;
+    border-radius: 5px;
 }

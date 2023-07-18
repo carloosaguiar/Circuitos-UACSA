@@ -130,17 +130,17 @@ SimRC.onclick = () =>{
 
     freq = freq.value * eval(escalaFreq.value);
     banda = banda.value *eval(escalaBanda.value);
-    let freq_corte = freq - (banda/2);
+    let wc = freq - (banda/2);
 
     let dataInput = {
         ResistorG: Rg.value * eval(escalaRg.value),
         Indutor: L.value * eval(escalaL.value),
-        Capacitor: 1,
-        Resistor: 1
+        Capacitor: null,
+        Resistor: null
     }
 
-    dataInput.Capacitor = 1/(freq*dataInput.Indutor);
-    dataInput.Resistor = dataInput.ResistorG/(1 - (freq_corte* dataInput.Capacitor*dataInput.ResistorG - (dataInput.ResistorG/(freq_corte*dataInput.Indutor)))**2)
+    dataInput.Capacitor = 1/((freq**2)*dataInput.Indutor);
+    dataInput.Resistor = dataInput.ResistorG/( -1 + ((wc*dataInput.ResistorG*dataInput.Capacitor - (dataInput.ResistorG/(wc*dataInput.Indutor)))**2)**0.5 )
 
     eel.rlcInfoParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)(sys =>
         {
@@ -166,17 +166,17 @@ SimRL.onclick = () =>{
 
     freq = freq.value * eval(escalaFreq.value);
     banda = banda.value *eval(escalaBanda.value);
-    let freq_corte = freq - (banda/2);
+    let wc = freq - (banda/2);
 
     let dataInput = {
         ResistorG: Rg.value * eval(escalaRg.value),
-        Indutor: 1,
+        Indutor: null,
         Capacitor: C.value* eval(escalaC.value),
-        Resistor: 1
+        Resistor: null
     }
 
-    dataInput.Indutor = 1/(freq*dataInput.Capacitor);
-    dataInput.Resistor = dataInput.ResistorG/(1 - (freq_corte* dataInput.Capacitor*dataInput.ResistorG - (dataInput.ResistorG/(freq_corte*dataInput.Indutor)))**2)
+    dataInput.Indutor = 1/((freq**2)*dataInput.Capacitor);
+    dataInput.Resistor = dataInput.ResistorG/( -1 + ((wc*dataInput.ResistorG*dataInput.Capacitor - (dataInput.ResistorG/(wc*dataInput.Indutor)))**2)**0.5 )
 
     eel.rlcInfoParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)(sys =>
         {

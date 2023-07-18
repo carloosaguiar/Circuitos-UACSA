@@ -70,6 +70,23 @@
     justify-content: space-around;
 }
 
+#rlc .main #serie .content .sessao p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+#rlc .main #serie .content .sessao select{
+    color: aliceblue;
+    background-color: #1fbf77;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+}
+
+option{
+    font-weight: bold;
+}
+
 #rlc .main #serie .content #dataInput .input-group{
     display: flex;
     flex-wrap: wrap;
@@ -84,6 +101,7 @@
 #rlc .main #serie .content #dataInput .input-group select{
     padding: 5.5px;
     margin-top: -50px;
+    border-radius: 0 5px 5px 0;
 }
 
 #rlc .main #serie .content #dataInput button{
@@ -119,6 +137,19 @@
     justify-content: space-around;
 }
 
+#rlc .main #paralelo .content .sessao p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+#rlc .main #paralelo .content .sessao select{
+    color: aliceblue;
+    background-color: #1fbf77;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+}
+
 #rlc .main #paralelo .content .dataInput2 .input-group{
     display: flex;
     flex-wrap: wrap;
@@ -148,4 +179,14 @@
 
 .dispositivo2{
     padding: 5px;
+}
+
+.test , #rlc .main #paralelo .content .sessao button{
+    font-weight: bold;
+    color: aliceblue;
+    background-color: #1fbf77;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
 }
