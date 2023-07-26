@@ -21,6 +21,7 @@ import "./style/index.scss";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LeftOutlined } from "@ant-design/icons";
+import axios from "axios";
 const { Option } = Select;
 const { Text } = Typography;
 
@@ -30,6 +31,11 @@ const RlcCircuit = () => {
   const [denominador, setDenominador] = useState("oi");
   const [atualizarLargura, setAtualizarLargura] = useState(false);
   const [larguraDivider, setLarguraDivider] = useState(0);
+  const [formatMedida, setFormatMedida] = useState({
+    resistor: 0,
+    capacitor: 0,
+    indutor: 0,
+  });
   const numeroSuperiorRef: any = useRef(null);
   const numeroInferiorRef: any = useRef(null);
 
@@ -74,30 +80,70 @@ const RlcCircuit = () => {
     }
   };
 
-  const medidaResistor = (inicial: string) => (
-    <Select defaultValue="3" style={{ width: 60 }}>
-      <Option value="0">{`G${inicial}`}</Option>
-      <Option value="1">{`M${inicial}`}</Option>
-      <Option value="2">{`K${inicial}`}</Option>
-      <Option value="3">{`${inicial}`}</Option>
-      <Option value="4">{`m${inicial}`}</Option>
-      <Option value="5">{`u${inicial}`}</Option>
-      <Option value="6">{`n${inicial}`}</Option>
-    </Select>
+  const medidaResistor = (inicial: string, tipo: string) => (
+    <Form.Item
+      label=""
+      name={tipo}
+      style={{ marginBottom: 0 }}
+      initialValue={0}
+    >
+      <Select style={{ width: 60 }}>
+        <Option value={9}>{`G${inicial}`}</Option>
+        <Option value={6}>{`M${inicial}`}</Option>
+        <Option value={3}>{`K${inicial}`}</Option>
+        <Option value={0}>{`${inicial}`}</Option>
+        <Option value={-3}>{`m${inicial}`}</Option>
+        <Option value={-6}>{`u${inicial}`}</Option>
+        <Option value={-9}>{`n${inicial}`}</Option>
+      </Select>
+    </Form.Item>
   );
 
   const medidaComponente = (value: string) => {
     switch (value) {
       case "valorResistor":
-        return medidaResistor("Ω");
+        return medidaResistor("Ω", "unidRes");
       case "valorCapacitor":
-        return medidaResistor("H");
+        return medidaResistor("H", "unidCap");
       case "valorIndutor":
-        return medidaResistor("F");
+        return medidaResistor("F", "unidInd");
 
       default:
-        return medidaResistor("");
+        return medidaResistor("", "");
     }
+  };
+
+  const geraRlcSerie = async (
+    var1: number,
+    var2: number,
+    var3: number,
+    freq: string,
+    visual: string
+  ) => {
+    const data = {
+      resistor: var1,
+      indutor: var2,
+      capacitor: var3,
+      freq: freq,
+      visual: visual,
+    };
+    console.log("data", data);
+    axios
+      .post(`http://localhost:5000/api/gerarRlcSerie`, data)
+      .then(async (response) => {
+        console.log("response", response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const submit = async (values: any) => {
+    // const resistor =
+    //   form.getFieldValue("valorResistor") *
+    //   100 ** form.getFieldValue("unidRes");
+    // console.log("values", resistor);
+    await geraRlcSerie(5, 40, 0.5, "hz", "Vr");
   };
 
   const items: TabsProps["items"] = [
@@ -132,10 +178,14 @@ const RlcCircuit = () => {
       />
       <Form
         form={form}
-        initialValues={{ tensaoSaida: "resistor", frequencia: "radseg" }}
+        initialValues={{
+          tensaoSaida: "resistor",
+          frequencia: "radseg",
+        }}
         layout="vertical"
         onValuesChange={changeForm}
         className="formGrid"
+        onFinish={submit}
       >
         <Row gutter={16}>
           <Col xs={8} sm={8} md={10} lg={8} xl={8}>
