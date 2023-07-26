@@ -21,9 +21,9 @@ function printTerminal(dataInput){
     eel.rlcInfoSerie(dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor, dataInput.saida)(data => {
 
         if(freq.value == 'hz'){
-            data[1] = (data[1]/(2*Math.PI)).toFixed(2) + " Hz"
+            data[1] = (data[1]/(2*Math.PI)).toPrecision(3) + " Hz"
         }else{
-            data[1] = (data[1]).toFixed(2) + " Rad/seg"
+            data[1] = (data[1]).toPrecision(3) + " Rad/seg"
         }
 
         ter3.value = `
@@ -130,7 +130,6 @@ SimRC.onclick = () =>{
 
     freq = freq.value * eval(escalaFreq.value);
     banda = banda.value *eval(escalaBanda.value);
-    let wc = freq - (banda/2);
 
     let dataInput = {
         ResistorG: Rg.value * eval(escalaRg.value),
@@ -140,7 +139,8 @@ SimRC.onclick = () =>{
     }
 
     dataInput.Capacitor = 1/((freq**2)*dataInput.Indutor);
-    dataInput.Resistor = dataInput.ResistorG/( -1 + ((wc*dataInput.ResistorG*dataInput.Capacitor - (dataInput.ResistorG/(wc*dataInput.Indutor)))**2)**0.5 )
+
+    dataInput.Resistor = 1/(banda*dataInput.Capacitor - (1/dataInput.ResistorG))
 
     eel.rlcInfoParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)(sys =>
         {
@@ -149,8 +149,8 @@ SimRC.onclick = () =>{
                         ${sys.replaceAll('\n','\n      ')}
                         
                     =============================================
-Valor de R = ${dataInput.Resistor} Ω
-Valor de C = ${dataInput.Capacitor} F
+Valor de R = ${dataInput.Resistor.toPrecision(3)} Ω
+Valor de C = ${dataInput.Capacitor.toPrecision(3)} F
                     `
         })
 
@@ -166,7 +166,6 @@ SimRL.onclick = () =>{
 
     freq = freq.value * eval(escalaFreq.value);
     banda = banda.value *eval(escalaBanda.value);
-    let wc = freq - (banda/2);
 
     let dataInput = {
         ResistorG: Rg.value * eval(escalaRg.value),
@@ -176,7 +175,8 @@ SimRL.onclick = () =>{
     }
 
     dataInput.Indutor = 1/((freq**2)*dataInput.Capacitor);
-    dataInput.Resistor = dataInput.ResistorG/( -1 + ((wc*dataInput.ResistorG*dataInput.Capacitor - (dataInput.ResistorG/(wc*dataInput.Indutor)))**2)**0.5 )
+
+    dataInput.Resistor = dataInput.Resistor = 1/(banda*dataInput.Capacitor - (1/dataInput.ResistorG))
 
     eel.rlcInfoParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)(sys =>
         {
@@ -185,8 +185,8 @@ SimRL.onclick = () =>{
                         ${sys.replaceAll('\n','\n      ')}
                         
                     =============================================
-Valor de R = ${dataInput.Resistor} Ω
-Valor de L = ${dataInput.Indutor} H
+Valor de R = ${dataInput.Resistor.toPrecision(3)} Ω
+Valor de L = ${dataInput.Indutor.toPrecision(3)} H
                     `
         })
 

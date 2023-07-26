@@ -1,12 +1,14 @@
-import eel
+import io
 import sys
 
-#Habilidando a importação no diretorio modules
-dirModules = sys.path[0] + '\modules'
-sys.path.append(dirModules)
+stream = io.StringIO()
+
+sys.stdout = stream
+sys.stderr = stream
 
 import H_s
 import RLC
+import eel
 
 eel.init('templates')
 
