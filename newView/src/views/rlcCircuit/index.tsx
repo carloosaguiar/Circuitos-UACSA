@@ -16,7 +16,8 @@ import CircuitoResistor from "../../images/circuitResistor.svg";
 import CircuitoCapacitor from "../../images/circuitCapacitor.svg";
 import CircuitoIndutor from "../../images/circuitIndutor.svg";
 import CircuitoIndCap from "../../images/circuitCapInd.svg";
-
+import "katex/dist/katex.min.css";
+import { InlineMath, BlockMath } from "react-katex";
 import "./style/index.scss";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -24,20 +25,16 @@ import { LeftOutlined } from "@ant-design/icons";
 import axios from "axios";
 const { Option } = Select;
 const { Text } = Typography;
+//const MathJax = require("react-mathjax");
 
 const RlcCircuit = () => {
   const [form] = Form.useForm();
-  const [numerador, setNumerador] = useState("oi");
-  const [denominador, setDenominador] = useState("oi");
+  const [numerador, setNumerador]: any = useState("oi");
+  const [denominador, setDenominador]: any = useState("oi");
   const [atualizarLargura, setAtualizarLargura] = useState(false);
   const [larguraDivider, setLarguraDivider] = useState(0);
-  const [formatMedida, setFormatMedida] = useState({
-    resistor: 0,
-    capacitor: 0,
-    indutor: 0,
-  });
-  const numeroSuperiorRef: any = useRef(null);
-  const numeroInferiorRef: any = useRef(null);
+  const numeroSuperiorRef: any = useRef("");
+  const numeroInferiorRef: any = useRef("");
 
   const tensaoField = Form.useWatch("tensaoSaida", form);
   let navigate = useNavigate();
@@ -46,7 +43,6 @@ const RlcCircuit = () => {
     if (atualizarLargura) {
       const numeroSuperior = numeroSuperiorRef.current;
       const numeroInferior = numeroInferiorRef.current;
-
       if (numeroSuperior && numeroInferior) {
         const tamanhoNumeroSuperior = numeroSuperior.offsetWidth;
         const tamanhoNumeroInferior = numeroInferior.offsetWidth;
@@ -67,13 +63,13 @@ const RlcCircuit = () => {
 
   const changeImage = (value: string) => {
     switch (value) {
-      case "resistor":
+      case "Vr":
         return CircuitoResistor;
-      case "capacitor":
+      case "Vc":
         return CircuitoCapacitor;
-      case "indutor":
+      case "Vi":
         return CircuitoIndutor;
-      case "capacitorIndutor":
+      case "Vlc":
         return CircuitoIndCap;
       default:
         return "";
@@ -81,32 +77,28 @@ const RlcCircuit = () => {
   };
 
   const medidaResistor = (inicial: string, tipo: string) => (
-    <Form.Item
-      label=""
-      name={tipo}
-      style={{ marginBottom: 0 }}
-      initialValue={0}
-    >
-      <Select style={{ width: 60 }}>
-        <Option value={9}>{`G${inicial}`}</Option>
-        <Option value={6}>{`M${inicial}`}</Option>
-        <Option value={3}>{`K${inicial}`}</Option>
-        <Option value={0}>{`${inicial}`}</Option>
-        <Option value={-3}>{`m${inicial}`}</Option>
-        <Option value={-6}>{`u${inicial}`}</Option>
-        <Option value={-9}>{`n${inicial}`}</Option>
+    <Form.Item name={tipo} label="" style={{ marginBottom: 0 }}>
+      <Select defaultValue="0" style={{ width: 60 }}>
+        <Option value="9">{`G${inicial}`}</Option>
+        <Option value="6">{`M${inicial}`}</Option>
+        <Option value="3">{`K${inicial}`}</Option>
+        <Option value="0">{`${inicial}`}</Option>
+        <Option value="-3">{`m${inicial}`}</Option>
+        <Option value="-6">{`u${inicial}`}</Option>
+        <Option value="-9">{`n${inicial}`}</Option>
       </Select>
     </Form.Item>
   );
 
   const medidaComponente = (value: string) => {
+    //console.log("value", value);
     switch (value) {
       case "valorResistor":
-        return medidaResistor("Ω", "unidRes");
-      case "valorCapacitor":
-        return medidaResistor("H", "unidCap");
+        return medidaResistor("Ω", "medRes");
       case "valorIndutor":
-        return medidaResistor("F", "unidInd");
+        return medidaResistor("H", "medCap");
+      case "valorCapacitor":
+        return medidaResistor("F", "medInd");
 
       default:
         return medidaResistor("", "");
@@ -120,30 +112,45 @@ const RlcCircuit = () => {
     freq: string,
     visual: string
   ) => {
-    const data = {
-      resistor: var1,
-      indutor: var2,
-      capacitor: var3,
-      freq: freq,
-      visual: visual,
-    };
-    console.log("data", data);
     axios
-      .post(`http://localhost:5000/api/gerarRlcSerie`, data)
+      .post(`http://localhost:5000/api/gerarRlcSerie`, {
+        resistor: var1,
+        indutor: var2,
+        capacitor: var3,
+        freq: freq,
+        visual: visual,
+      })
       .then(async (response) => {
-        console.log("response", response);
+        console.log("response", response.data);
+        // const num = textoPotencia(response.data.polinomio[0]);
+        // const den = textoPotencia(response.data.polinomio[1]);
+        // console.log("text",textoPotencia(response.data.polinomio[1]) )
+        //console.log("denominac",)
+        setNumerador(response.data.polinomio[0]);
+        setDenominador(response.data.polinomio[1]);
+
+        setAtualizarLargura(true);
+        //console.log("var2", response.data.funcaoTranferencia[0]);
+        //setData(response.data.message);
+        // Faça o que desejar com os dados da resposta
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
+  const inlineFormula = "s^2";
+  const blockFormula = `\\frac{n!}{k!(n-k)!} = \\binom{n}{k}`;
+
   const submit = async (values: any) => {
-    // const resistor =
-    //   form.getFieldValue("valorResistor") *
-    //   100 ** form.getFieldValue("unidRes");
-    // console.log("values", resistor);
-    await geraRlcSerie(5, 40, 0.5, "hz", "Vr");
+    console.log("values", values);
+    await geraRlcSerie(
+      values.valorResistor,
+      values.valorIndutor,
+      values.valorCapacitor,
+      "hz",
+      "Vr"
+    );
   };
 
   const items: TabsProps["items"] = [
@@ -179,8 +186,11 @@ const RlcCircuit = () => {
       <Form
         form={form}
         initialValues={{
-          tensaoSaida: "resistor",
-          frequencia: "radseg",
+          tensaoSaida: "Vr",
+          frequencia: "hz",
+          valorResistor: 1,
+          valorCapacitor: 1,
+          valorIndutor: 1,
         }}
         layout="vertical"
         onValuesChange={changeForm}
@@ -197,12 +207,12 @@ const RlcCircuit = () => {
               >
                 <Select
                   options={[
-                    { value: "resistor", label: "Resistor (Vr)" },
-                    { value: "capacitor", label: "Capacitor (Vc)" },
-                    { value: "indutor", label: "Indutor (Vl)" },
+                    { value: "Vr", label: "Resistor (Vr)" },
+                    { value: "Vc", label: "Capacitor (Vc)" },
+                    { value: "Vi", label: "Indutor (Vl)" },
                     {
                       value: "capacitorIndutor",
-                      label: "Capacitor + Indutor (Vlc)",
+                      label: "Vlc",
                     },
                   ]}
                 />
@@ -221,8 +231,8 @@ const RlcCircuit = () => {
               >
                 <Select
                   options={[
-                    { value: "radseg", label: "Rad/seg" },
-                    { value: "hertz", label: "Hertz" },
+                    { value: "hz", label: "Rad/seg" },
+                    { value: "rad", label: "Hertz" },
                   ]}
                 />
               </Form.Item>
@@ -234,36 +244,45 @@ const RlcCircuit = () => {
                 label="Valor do resistor"
                 name="valorResistor"
                 style={{ width: "150px" }}
+                rules={[
+                  { required: true, message: "Informe o valor do resistor." },
+                ]}
               >
                 <InputNumber
                   addonAfter={medidaComponente("valorResistor")}
                   className="inpNumb"
                   controls={false}
-                  min={0}
+                  // min={1}
                 />
               </Form.Item>
               <Form.Item
                 label="Valor do indutor"
                 name="valorIndutor"
                 style={{ width: "150px" }}
+                rules={[
+                  { required: true, message: "Informe o valor do indutor." },
+                ]}
               >
                 <InputNumber
                   addonAfter={medidaComponente("valorIndutor")}
                   className="inpNumb"
                   controls={false}
-                  min={0}
+                  // min={1}
                 />
               </Form.Item>
               <Form.Item
                 label="Valor do capacitor"
                 name="valorCapacitor"
                 style={{ width: "150px" }}
+                rules={[
+                  { required: true, message: "Informe o valor do capacitor." },
+                ]}
               >
                 <InputNumber
                   addonAfter={medidaComponente("valorCapacitor")}
                   className="inpNumb"
                   controls={false}
-                  min={0}
+                  // min={1}
                 />
               </Form.Item>
               <div className="buttonsSubmit">
@@ -286,7 +305,7 @@ const RlcCircuit = () => {
               //style={{ width: 200 }}
             >
               <Text strong className="numerador" ref={numeroSuperiorRef}>
-                {numerador}
+                <InlineMath math={numerador} ref={numeroSuperiorRef} />
               </Text>
               <div
                 style={{
@@ -296,7 +315,7 @@ const RlcCircuit = () => {
                 }}
               />
               <Text strong ref={numeroInferiorRef}>
-                {denominador}
+                <InlineMath math={denominador} ref={numeroInferiorRef} />
               </Text>
             </Card>
           </Col>

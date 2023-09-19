@@ -3,9 +3,10 @@ import math
 from flask import Flask, request, jsonify
 import subprocess
 from flask_cors import CORS
-from utils.rcrlUtil import info_serie
-from utils.rcrlUtil import info
+from utils.rcrlUtil import info_serie, info
+from utils.formatUtil import format_equation_with_powers
 import re
+import sys
 
 
 app = Flask(__name__)
@@ -48,9 +49,10 @@ def gera_polinomio():
 
 @app.route('/api/gerarRlcSerie', methods=['POST'])
 def gera_rlcSerie():
+    # print('oysi')
+    data = request.json
 
-    data = request.get_json()
-    print('oysi', data)
+    # print("data",data.get('indutor'))
     hs, freq_corte = info_serie(
         data.get('resistor'), data.get('indutor'),  data.get('capacitor'), data.get('visual'))
 
@@ -58,9 +60,28 @@ def gera_rlcSerie():
         freq_corte = str(round((freq_corte/(2*math.pi)), 2)) + "Hz"
     else:
         freq_corte = str(round((freq_corte), 2)) + "Rad/seg"
+
+    sys.stdout.flush()
+    # Remover os espaços em branco no início e no final da string
+    cleaned_result = str(hs).strip()
+
+    # Extrair o valor numérico removendo os espaços antes de 's'
+    numeric_value = cleaned_result.split('s')[0].strip() + 's'
+
+    numeric_value = re.sub(r'[-\n]', '', numeric_value)
+
+    # Extrair o polinômio após o primeiro 's' e remover espaços adicionais
+    polynomial = cleaned_result.split('\n', 3)[-1].strip()
+
+    # Criar o array com os dados no formato desejado
+    result_array = [cleaned_result[0], polynomial]
+
+    # print('formatSup', formatSup)
+    # print('formatInf', formatInf)
+
     dataJson = {
-        'Polisssnomio H(s): ': str(hs),
-        'Frequência de corte: ': freq_corte,
+        'polinomio':  result_array,
+        'freqCorte: ': freq_corte,
     }
     return jsonify(dataJson)
 
