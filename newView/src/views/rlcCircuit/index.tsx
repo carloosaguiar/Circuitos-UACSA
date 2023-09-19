@@ -33,8 +33,8 @@ const RlcCircuit = () => {
   const [denominador, setDenominador]: any = useState("oi");
   const [atualizarLargura, setAtualizarLargura] = useState(false);
   const [larguraDivider, setLarguraDivider] = useState(0);
-  const numeroSuperiorRef: any = useRef("");
-  const numeroInferiorRef: any = useRef("");
+  const numeroSuperiorRef: any = useRef("oi");
+  const numeroInferiorRef: any = useRef("oi");
 
   const tensaoField = Form.useWatch("tensaoSaida", form);
   let navigate = useNavigate();
@@ -139,9 +139,6 @@ const RlcCircuit = () => {
       });
   };
 
-  const inlineFormula = "s^2";
-  const blockFormula = `\\frac{n!}{k!(n-k)!} = \\binom{n}{k}`;
-
   const submit = async (values: any) => {
     console.log("values", values);
     await geraRlcSerie(
@@ -149,7 +146,7 @@ const RlcCircuit = () => {
       values.valorIndutor,
       values.valorCapacitor,
       "hz",
-      "Vr"
+      values.tensaoSaida
     );
   };
 

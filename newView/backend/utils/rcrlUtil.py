@@ -58,6 +58,8 @@ def info_serie(R, L, C, visual):
             else:
                 ganho = 1/(L*C)
                 Hs = control.tf([1], [1, (R/L), ganho])
+                print('hfvc', Hs)
+                sys.stdout.flush()
 
         case 'Vl':
             ganho = 1
@@ -74,8 +76,7 @@ def info_serie(R, L, C, visual):
         case 'Vr':
 
             if (C == 0):
-                print("C", C)
-                sys.stdout.flush()
+
                 ganho = R/L
 
                 Hs = ganho*control.tf([1], [1, (1/(R/L))])
@@ -102,12 +103,10 @@ def info_serie(R, L, C, visual):
             elif (L == 0):
                 ganho = 1
                 Hs = control.tf([1, 0], [1, (1/(R*C))])
-                print('Hs', Hs)
-                sys.stdout.flush()
+
             else:
                 ganho = R/L
                 Hs = control.tf([1, 0], [1, (R/L), (1/(C*L))])
-                print('hs', Hs)
                 # ganho = R/L
                 # Hs = ganho*control.tf([1, 0], [1, (R/L), (1/(C*L))])
                 # Hs = ganho*control.tf([1], [1, (1/(R/L))])
@@ -124,8 +123,6 @@ def info_serie(R, L, C, visual):
                 # Separa as strings do numerador e denominador (assume strings vazias caso estejam ausentes)
                 numerador = tf_parts[0] if tf_parts else ''
                 denominador = tf_parts[1] if len(tf_parts) > 1 else ''
-                print('n, ',  numerador)
-                sys.stdout.flush()
 
         case 'Vlc':
             ganho = 1

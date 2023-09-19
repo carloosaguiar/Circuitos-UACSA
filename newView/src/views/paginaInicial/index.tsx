@@ -1,20 +1,8 @@
-import {
-  Button,
-  Card,
-  Col,
-  Divider,
-  Form,
-  Image,
-  Input,
-  Layout,
-  Row,
-  Typography,
-} from "antd";
+import { Button, Card, Image, Layout, Typography } from "antd";
 import "./style/index.scss";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import { Carousel } from "react-carousel3";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const uacsaIcon = require("../../images/uacsaIcon.jpg");
 const ufrpeIcon = require("../../images/ufrpeIcon.jpg");
