@@ -1,16 +1,18 @@
 import io
 import sys
+import eel
 
 stream = io.StringIO()
 
 sys.stdout = stream
 sys.stderr = stream
 
-import H_s
-import RLC
-import eel
+sys.path.append('./modules')
 
 eel.init('templates')
+
+import H_s
+import RLC
 
 #======== SESSÂO DE FUNÇÕES =========
 

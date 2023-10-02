@@ -1,5 +1,4 @@
 /newView
-/__pycache__
+modules/__pycache__
 /build
 /dist
-main.spec
