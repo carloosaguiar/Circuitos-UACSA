@@ -63,4 +63,4 @@ def rlcPlotParalelo(Rg,R,L,C):
 
 
 #======= STARTA A APLICAÇÃO ========
-eel.start('index.html', size = (1200, 800))
+eel.start('index.html', size = (1230, 800))

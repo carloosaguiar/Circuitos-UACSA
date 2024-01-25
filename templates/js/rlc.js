@@ -3,7 +3,6 @@
 
 const tenSaida = document.getElementById('dispositivo');
 const freq = document.getElementById('unidFreq');
-
 //inputs dos valores
 const [valorResistor, valorIndutor, valorCapacitor] = document.querySelectorAll('#dataInput > .input-group > input');
 
@@ -15,6 +14,16 @@ const [gerarHs, plotar] = document.querySelectorAll('.content > .sessao > button
 
 //terminal de informações
 const ter3 = document.getElementById('ter3');
+
+function correcao(array){
+
+    array.forEach(input => {
+        if (input.value <= 0){
+            input.value = Math.abs(input.value);
+        }
+    });
+
+}
 
 function printTerminal(dataInput){
     
@@ -39,6 +48,8 @@ Polinomio H(s):
 
 gerarHs.onclick = () =>{
 
+    correcao([valorResistor, valorIndutor, valorCapacitor]);
+
     let dataInput = {
         Resistor: valorResistor.value * eval(escalaResistor.value),
         Indutor: valorIndutor.value * eval(escalaIndutor.value),
@@ -50,6 +61,8 @@ gerarHs.onclick = () =>{
 }
 
 plotar.onclick = ()=>{
+
+    correcao([valorResistor, valorIndutor, valorCapacitor]);
 
     let dataInput = {
         Resistor: valorResistor.value * eval(escalaResistor.value),
@@ -92,6 +105,8 @@ LR.onclick = () =>{
 }
 
 function execSim(dataInput){
+    
+    correcao([dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor]);
 
     eel.rlcInfoParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)(sys =>
         {
@@ -107,6 +122,8 @@ function execSim(dataInput){
 
 SimHS.onclick = () =>{
     const [Rg, R, L, C] = document.querySelectorAll('#Hs > .input-group > input');
+
+    correcao([Rg, R, L, C]);
 
     //slect das escalas
     const[escalaRg ,escalaR, escalaL, escalaC] = document.querySelectorAll('#Hs > .input-group > select');
@@ -125,6 +142,8 @@ SimHS.onclick = () =>{
 SimRC.onclick = () =>{
     let [Rg, freq, banda, L] = document.querySelectorAll('#RC > .input-group > input');
 
+    correcao([Rg, freq, banda, L]);
+
     //slect das escalas
     let[escalaRg ,escalaFreq, escalaBanda, escalaL] = document.querySelectorAll('#RC > .input-group > select');
 
@@ -142,24 +161,32 @@ SimRC.onclick = () =>{
 
     dataInput.Resistor = 1/(banda*dataInput.Capacitor - (1/dataInput.ResistorG))
 
-    eel.rlcInfoParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)(sys =>
-        {
-            terminal4.value = `
-            Polinomio H(s):
-                        ${sys.replaceAll('\n','\n      ')}
-                        
-                    =============================================
+    if(dataInput.Resistor < 0){
+        alert("Valores incongruentes, por favor insira dados reais")
+    }
+    else{
+
+        eel.rlcInfoParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)(sys =>
+            {
+                terminal4.value = `
+                Polinomio H(s):
+                            ${sys.replaceAll('\n','\n      ')}
+                            
+                        =============================================
 Valor de R = ${dataInput.Resistor.toPrecision(3)} Ω
 Valor de C = ${dataInput.Capacitor.toPrecision(3)} F
-                    `
-        })
-
-    eel.rlcPlotParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)
+                        `
+            })
+    
+        eel.rlcPlotParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)
+    }
 
 }
 
 SimRL.onclick = () =>{
     let [Rg, freq, banda, C] = document.querySelectorAll('#RL > .input-group > input');
+
+    correcao([Rg, freq, banda, C])
 
     //slect das escalas
     let[escalaRg ,escalaFreq, escalaBanda, escalaC] = document.querySelectorAll('#RL > .input-group > select');
@@ -178,17 +205,24 @@ SimRL.onclick = () =>{
 
     dataInput.Resistor = dataInput.Resistor = 1/(banda*dataInput.Capacitor - (1/dataInput.ResistorG))
 
-    eel.rlcInfoParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)(sys =>
-        {
-            terminal4.value = `
-            Polinomio H(s):
-                        ${sys.replaceAll('\n','\n      ')}
-                        
-                    =============================================
+    if(dataInput.Resistor){
+        alert("Valores incongruentes, porfavor insira dados reais")
+    }
+    else{
+    
+        eel.rlcInfoParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)(sys =>
+            {
+                terminal4.value = `
+                Polinomio H(s):
+                            ${sys.replaceAll('\n','\n      ')}
+                            
+                        =============================================
 Valor de R = ${dataInput.Resistor.toPrecision(3)} Ω
 Valor de L = ${dataInput.Indutor.toPrecision(3)} H
-                    `
-        })
+                        `
+            })
+    
+        eel.rlcPlotParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)
 
-    eel.rlcPlotParalelo(dataInput.ResistorG,dataInput.Resistor, dataInput.Indutor, dataInput.Capacitor)
+    }
 }

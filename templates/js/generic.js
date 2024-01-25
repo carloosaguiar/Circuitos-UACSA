@@ -112,3 +112,13 @@ button_info2.onclick = () =>{
     body.appendChild(div);
 
 };
+
+function trocaImagem(){
+
+    console.log('go')
+    let dispositivo = document.getElementById("dispositivo").value;
+    let img = document.getElementById('imgSelect');
+
+    img.src = `img/${dispositivo}.png`;
+
+};

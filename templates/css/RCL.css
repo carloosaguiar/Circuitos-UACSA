@@ -87,6 +87,10 @@ option{
     font-weight: bold;
 }
 
+#rlc .main #serie .content #dataInput{
+    margin-left: -100px;
+}
+
 #rlc .main #serie .content #dataInput .input-group{
     display: flex;
     flex-wrap: wrap;

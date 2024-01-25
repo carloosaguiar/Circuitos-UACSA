@@ -79,7 +79,7 @@
                                 </span>
 
                                 <span>
-                                    <p>Nº de pontos</p>
+                                    <p>Nº de pontos</p> 
                                     <input class="interval" type="number" value="20">
                                 </span>
 
@@ -185,14 +185,14 @@
                     <div class="content">
                         <section class="sessao" id="config">
                             <p>Tensão de saída</p>
-                            <select id="dispositivo">
+                            <select id="dispositivo" onclick="trocaImagem()">
                                 <option value="Vr">Resistor (Vr)</option>
                                 <option value="Vl">Indutor (Vl)</option>
                                 <option value="Vc">Capacitor (Vc)</option>
                                 <option value="Vlc">Capac. + Indu. (Vlc)</option>
                             </select>
     
-                            <img src="img/RLC-s.jpg">
+                            <img id="imgSelect" src="img/Vr.png" style="rotate: 90deg; scale: 0.6; width: 450px; height: 400px;">
     
                             <select id="unidFreq">
                                 <option value="rad-seg">Rad/seg</option>
