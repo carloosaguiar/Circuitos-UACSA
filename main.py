@@ -1,13 +1,12 @@
 import io
 import sys
-import eel
 
 stream = io.StringIO()
 
 sys.stdout = stream
 sys.stderr = stream
 
-sys.path.append('./modules')
+import eel
 
 eel.init('templates')
 
