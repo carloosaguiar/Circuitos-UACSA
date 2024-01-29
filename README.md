@@ -12,6 +12,7 @@ Como o software ainda está na fase de desenvolvimento ainda não é possivel fa
 ### 1º Passo
 
 Baixe o código que está no repositorio e instale o Python mais recente, em sequencia instale a biblioteca EEL Python, numpy, control e matplotlib
+
     pip install eel numpy control matplotlib
 
 ### 2º Passo 
